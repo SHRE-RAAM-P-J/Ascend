@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "company": "Google",
+    "title": "Software Engineering Intern",
+    "location": "India",
+    "type": "Internship",
+    "source": "Google Careers",
+    "applyLink": "https://careers.google.com",
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": 2,
+    "company": "Microsoft",
+    "title": "Software Engineer Intern",
+    "location": "India",
+    "type": "Internship",
+    "source": "Microsoft Careers",
+    "applyLink": "https://careers.microsoft.com",
+    "lastUpdated": "2026-06-01"
+  }
+]
