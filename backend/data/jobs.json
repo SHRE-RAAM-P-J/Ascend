@@ -18,5 +18,15 @@
     "source": "Microsoft Careers",
     "applyLink": "https://careers.microsoft.com",
     "lastUpdated": "2026-06-01"
+  },
+  {
+  "id": 3,
+  "company": "Zoho",
+  "title": "Frontend Intern",
+  "location": "Chennai",
+  "type": "Internship",
+  "source": "Zoho Careers",
+  "applyLink": "https://www.zoho.com/careers/",
+  "lastUpdated": "2026-06-02"
   }
 ]

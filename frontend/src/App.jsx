@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import JobCard from "./components/JobCard";
 
 function App() {
   const [jobs, setJobs] = useState([]);
@@ -14,23 +15,8 @@ function App() {
   return (
     <div>
       <h1>Ascend</h1>
-
       {jobs.map((job) => (
-        <div key={job.id}>
-          <h3>{job.title}</h3>
-          <p>{job.company}</p>
-          <p>{job.location}</p>
-
-          <a
-            href={job.applyLink}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Apply
-          </a>
-
-          <hr />
-        </div>
+        <JobCard key={job.id} job={job} />
       ))}
     </div>
   );
