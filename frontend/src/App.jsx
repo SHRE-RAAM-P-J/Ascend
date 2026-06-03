@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "./components/Navbar";
+import SearchBar from "./components/SearchBar";
 import JobCard from "./components/JobCard";
 
 function App() {
   const [jobs, setJobs] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axios
@@ -14,10 +17,28 @@ function App() {
 
   return (
     <div>
-      <h1>Ascend</h1>
-      {jobs.map((job) => (
-        <JobCard key={job.id} job={job} />
-      ))}
+      <Navbar />
+
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+      />
+
+      {jobs
+        .filter((job) =>
+          job.title
+            .toLowerCase()
+            .includes(search.toLowerCase()) ||
+          job.company
+            .toLowerCase()
+            .includes(search.toLowerCase())
+        )
+        .map((job) => (
+          <JobCard
+            key={job.id}
+            job={job}
+          />
+        ))}
     </div>
   );
 }
