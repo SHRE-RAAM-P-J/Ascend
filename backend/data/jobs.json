@@ -28,5 +28,14 @@
   "source": "Zoho Careers",
   "applyLink": "https://www.zoho.com/careers/",
   "lastUpdated": "2026-06-02"
+  },
+  {
+  "id": 4,
+  "company": "Amazon",
+  "title": "SDE Intern",
+  "location": "Bangalore",
+  "type": "Internship",
+  "source": "Amazon Careers",
+  "applyLink": "https://www.amazon.jobs"
   }
 ]

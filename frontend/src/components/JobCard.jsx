@@ -1,6 +1,8 @@
+import "../styles/JobCard.css";
+
 function JobCard({ job }) {
   return (
-    <div>
+    <div className="job-card">
       <h2>{job.title}</h2>
 
       <p>{job.company}</p>
@@ -8,14 +10,13 @@ function JobCard({ job }) {
       <p>{job.location}</p>
 
       <a
+        className="apply-btn"
         href={job.applyLink}
         target="_blank"
         rel="noreferrer"
       >
         Apply
       </a>
-
-      <hr />
     </div>
   );
 }
