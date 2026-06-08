@@ -3,10 +3,12 @@ import axios from "axios";
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
 import JobCard from "./components/JobCard";
+import CompanyFilter from "./components/CompanyFilter";
 
 function App() {
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
+  const [selectedCompany, setSelectedCompany] = useState("All");
   const filteredJobs = jobs.filter((job) =>
   job.title
     .toLowerCase()
@@ -29,6 +31,10 @@ function App() {
       <SearchBar
         search={search}
         setSearch={setSearch}
+      />
+      <CompanyFilter
+        selectedCompany={selectedCompany}
+        setSelectedCompany={setSelectedCompany}
       />
       {filteredJobs.length === 0 ? (
         <p>No opportunities found. Try another search term.</p>
