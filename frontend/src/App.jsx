@@ -9,14 +9,22 @@ function App() {
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedCompany, setSelectedCompany] = useState("All");
-  const filteredJobs = jobs.filter((job) =>
+  const filteredJobs = jobs.filter((job) =>{
+  const matchesSearch =
   job.title
     .toLowerCase()
     .includes(search.toLowerCase()) ||
   job.company
     .toLowerCase()
-    .includes(search.toLowerCase())
-  );
+    .includes(search.toLowerCase());
+
+  const matchesCompany =
+    selectedCompany === "All" ||
+    job.company === selectedCompany;
+
+  return matchesSearch && matchesCompany;
+  });
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/jobs")
