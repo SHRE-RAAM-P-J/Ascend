@@ -1,6 +1,7 @@
 function CompanyFilter({
   selectedCompany,
-  setSelectedCompany
+  setSelectedCompany,
+  uniqueCompanies,
 }) {
   return (
     <select
@@ -9,11 +10,11 @@ function CompanyFilter({
         setSelectedCompany(e.target.value)
       }
     >
-      <option value="All">All Companies</option>
-      <option value="Google">Google</option>
-      <option value="Microsoft">Microsoft</option>
-      <option value="Amazon">Amazon</option>
-      <option value="Zoho">Zoho</option>
+    {uniqueCompanies.map((company) => (
+      <option key={company} value={company}>
+        {company}
+      </option>
+    ))}
     </select>
   );
 }

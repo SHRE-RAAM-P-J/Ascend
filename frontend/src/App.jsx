@@ -31,6 +31,10 @@ function App() {
       .then((res) => setJobs(res.data))
       .catch((err) => console.log(err));
   }, []);
+  const uniqueCompanies = [
+    "All",
+    ...new Set(jobs.map((job) => job.company)),
+  ];
 
   return (
     <div>
@@ -43,6 +47,7 @@ function App() {
       <CompanyFilter
         selectedCompany={selectedCompany}
         setSelectedCompany={setSelectedCompany}
+        uniqueCompanies={uniqueCompanies}
       />
       {filteredJobs.length === 0 ? (
         <p>No opportunities found. Try another search term.</p>
