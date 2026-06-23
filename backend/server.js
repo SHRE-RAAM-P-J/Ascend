@@ -1,15 +1,24 @@
 const express = require("express");
 const cors = require("cors");
-const jobs = require("./data/jobs.json");
+
 const fetchZohoJobs = require("./services/fetchZohoJobs");
+const fetchMicrosoftJobs = require("./services/fetchMicrosoftJobs");
+
 const app = express();
 
 app.use(cors());
 
 app.get("/jobs", async (req, res) => {
   try {
-    const jobs = await fetchZohoJobs();
-    res.json(jobs);
+    const zohoJobs = await fetchZohoJobs();
+    const microsoftJobs = await fetchMicrosoftJobs();
+
+    const allJobs = [
+      ...zohoJobs,
+      ...microsoftJobs,
+    ];
+
+    res.json(allJobs);
   } catch (error) {
     console.error(error);
     res.status(500).json({
