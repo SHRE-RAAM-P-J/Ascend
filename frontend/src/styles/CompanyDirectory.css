@@ -1,0 +1,73 @@
+/* Browser‑like container and responsive company grid */
+
+.browser-container {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fafafa;
+  max-width: 1200px;
+  margin: 24px auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.browser-header {
+  height: 32px;
+  background: #eaeaea;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+
+.browser-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.browser-circle.red { background: #ff5f57; }
+.browser-circle.yellow { background: #ffbd2e; }
+.browser-circle.green { background: #27c93f; }
+
+.company-grid {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  /* Desktop 4‑5 columns */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.company-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.company-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.company-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Tablet – 2‑3 columns */
+@media (max-width: 900px) {
+  .company-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+/* Mobile – 1‑2 columns */
+@media (max-width: 600px) {
+  .company-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}

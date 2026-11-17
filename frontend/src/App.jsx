@@ -5,6 +5,7 @@ import SearchBar from "./components/SearchBar";
 import JobCard from "./components/JobCard";
 import CompanyFilter from "./components/CompanyFilter";
 
+import CompanyDirectory from "./components/CompanyDirectory";
 function App() {
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
@@ -60,6 +61,7 @@ function App() {
           job={job}
         />
       ))}
+      <CompanyDirectory />
     </div>
   );
 }
