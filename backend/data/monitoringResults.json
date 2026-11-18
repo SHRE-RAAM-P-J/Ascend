@@ -1,0 +1,23 @@
+{
+  "summary": {
+    "totalMonitored": 1,
+    "up": 0,
+    "down": 1,
+    "unknown": 0,
+    "lastRunAt": null,
+    "isRunning": false
+  },
+  "results": [
+    {
+      "companyId": 9999,
+      "companyName": "Mock Company",
+      "careersUrl": "https://example.com/careers",
+      "status": "DOWN",
+      "httpStatusCode": 500,
+      "responseTimeMs": 90,
+      "lastCheckedAt": "2026-11-17T16:27:05.965Z",
+      "errorMessage": "Failed after retry: Server Error",
+      "consecutiveFailures": 1
+    }
+  ]
+}

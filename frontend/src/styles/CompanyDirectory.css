@@ -110,6 +110,20 @@
   white-space: nowrap;
 }
 
+.stats-pill.live-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-up {
+  color: #34d399;
+}
+
+.stat-down {
+  color: #f87171;
+}
+
 /* Company Cards Grid */
 .company-grid {
   display: grid;
