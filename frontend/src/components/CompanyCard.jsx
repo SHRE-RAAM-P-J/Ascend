@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { formatRelativeTime } from "../utils/timeAgo";
 import "../styles/CompanyCard.css";
 

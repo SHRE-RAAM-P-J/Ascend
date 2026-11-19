@@ -77,7 +77,8 @@ Finding legitimate career opportunities across premier global technology firms o
 ### Backend
 - **Runtime:** Node.js (v18+ recommended)
 - **Framework:** Express 5.2
-- **Scheduling:** node-cron 4.6
+- **Security:** Helmet, express-rate-limit, SSRF URL Validator, strict CORS, request body limits (10kb)
+- **Scheduling:** node-cron 4.6 (requires persistent process; see hosting notes)
 - **HTTP Client:** Axios (with timeout, redirect, and retry control)
 - **Data Store:** Atomic persistent JSON storage (`backend/data/monitoringResults.json`)
 
@@ -148,6 +149,8 @@ Ascend/
 │   │   ├── fetchMicrosoftJobs.js  # Microsoft Careers collector
 │   │   ├── fetchZohoJobs.js       # Zoho Recruit collector
 │   │   └── updateJobs.js          # Aggregator cache updater
+│   ├── utils/
+│   │   └── ssrfValidator.js       # SSRF protection and IP/protocol validator
 │   └── tests/
 │       └── monitoring.test.js     # Health monitor test suite (100% pass)
 └── frontend/
@@ -239,6 +242,11 @@ Ascend/
 |:---|:---|:---|:---|
 | `PORT` | `backend` | `5000` | Port for the Express REST server |
 | `NODE_ENV` | `backend` | `development` | Environment mode (`development` / `production`) |
+| `CORS_ORIGIN` | `backend` | `http://localhost:5173,http://localhost:5000` | Comma-separated allowed CORS origins |
+| `VITE_API_URL` | `frontend` | *(Empty string / same-origin)* | Base URL for API requests in production or custom CDN |
+
+> **Important Deployment Note on Scheduled Monitoring:**
+> The automated 60-minute health monitor utilizes `node-cron` inside the Express process. It requires a persistent runtime (such as Render Web Service, Railway, Fly.io, AWS ECS, or a VPS). Serverless platforms that scale down to zero (e.g. Vercel Serverless Functions, AWS Lambda) sleep between HTTP requests and cannot execute background cron intervals without external webhook pingers.
 
 ---
 
