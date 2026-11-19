@@ -22,17 +22,14 @@ const CompanyCard = ({ company, monitoring }) => {
   // Status icon configuration
   const statusConfig = {
     UP: {
-      icon: "↑",
       label: "UP",
       className: "status-up"
     },
     DOWN: {
-      icon: "↓",
       label: "DOWN",
       className: "status-down"
     },
     UNKNOWN: {
-      icon: "●",
       label: "UNKNOWN",
       className: "status-unknown"
     }
@@ -52,39 +49,44 @@ const CompanyCard = ({ company, monitoring }) => {
       className="company-card"
       target="_blank"
       rel="noopener noreferrer"
-      title={`Open ${company.name} Official Careers Portal (Status: ${currentStatus.label})`}
+      title={`Open ${company.name} Official Careers Portal`}
       onClick={(e) => {
         if (!company.careersUrl) {
           e.preventDefault();
         }
       }}
     >
-      <div className="card-logo-wrapper">
-        {!imgError && logoUrl ? (
-          <img
-            src={logoUrl}
-            alt={`${company.name} logo`}
-            className="company-logo"
-            loading="lazy"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <div className="logo-fallback" aria-label={company.name}>
-            {getInitials(company.name)}
-          </div>
-        )}
+      {/* Top: logo + external icon */}
+      <div className="card-top">
+        <div className="card-logo-wrapper">
+          {!imgError && logoUrl ? (
+            <img
+              src={logoUrl}
+              alt={`${company.name} logo`}
+              className="company-logo"
+              loading="lazy"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="logo-fallback" aria-label={company.name}>
+              {getInitials(company.name)}
+            </div>
+          )}
+        </div>
+        <span className="external-icon" aria-hidden="true">↗</span>
       </div>
 
+      {/* Divider */}
+      <div className="card-divider" />
+
+      {/* Bottom: name + status */}
       <div className="card-info">
         <div className="card-name-row">
           <span className="company-name">{company.name}</span>
-          <span className="external-icon" aria-hidden="true">↗</span>
         </div>
-
-        {/* Status indicator row below company name */}
         <div className="card-status-row">
           <span className={`status-pill ${currentStatus.className}`}>
-            <span className="status-arrow" aria-hidden="true">{currentStatus.icon}</span>
+            <span className="status-dot" aria-hidden="true" />
             <span className="status-text">{currentStatus.label}</span>
           </span>
           <span className="status-timestamp">{timeText}</span>

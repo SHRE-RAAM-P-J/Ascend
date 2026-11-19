@@ -9,16 +9,16 @@ const API_BASE = import.meta.env.VITE_API_URL !== undefined
   : (import.meta.env.DEV ? "http://localhost:5000" : "");
 
 const MONITORING_API_URL = `${API_BASE}/api/monitoring/status`;
-const STATUS_POLL_INTERVAL_MS = 60000; // Refresh from backend every 60s
-const CLOCK_TICK_INTERVAL_MS = 30000;   // Refresh human-readable times every 30s
+const STATUS_POLL_INTERVAL_MS = 60000;
+const CLOCK_TICK_INTERVAL_MS = 30000;
 
 const CompanyDirectory = () => {
-  // Filter out disabled companies (KPIT is temporarily excluded per requirement)
   const visibleCompanies = companies.filter((c) => c.enabled !== false);
 
   const [monitoringMap, setMonitoringMap] = useState({});
   const [summary, setSummary] = useState(null);
   const [, setTick] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     let isSubscribed = true;
@@ -60,6 +60,12 @@ const CompanyDirectory = () => {
     };
   }, []);
 
+  const filteredCompanies = searchQuery.trim()
+    ? visibleCompanies.filter((c) =>
+        c.name.toLowerCase().includes(searchQuery.trim().toLowerCase())
+      )
+    : visibleCompanies;
+
   return (
     <div className="directory-wrapper">
       <div className="browser-container">
@@ -83,20 +89,42 @@ const CompanyDirectory = () => {
                 {summary.down > 0 && <span className="stat-down"> · ↓ {summary.down} DOWN</span>}
               </span>
             ) : (
-              <span className="stats-pill">{visibleCompanies.length} Verified Portals</span>
+              <span className="stats-pill">{visibleCompanies.length} Portals</span>
             )}
           </div>
         </div>
 
-        {/* Company Grid (Responsive: 5-col Desktop, 3-col Tablet, 2-col Mobile) */}
-        <div className="company-grid">
-          {visibleCompanies.map((company) => (
-            <CompanyCard
-              key={company.id}
-              company={company}
-              monitoring={monitoringMap[company.id]}
+        {/* Search Toolbar */}
+        <div className="directory-toolbar">
+          <div className="search-wrapper">
+            <span className="search-icon" aria-hidden="true">⌕</span>
+            <input
+              type="text"
+              className="directory-search"
+              placeholder="Search companies…"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search companies"
             />
-          ))}
+          </div>
+          <span className="company-count-label">
+            {filteredCompanies.length} of {visibleCompanies.length} companies
+          </span>
+        </div>
+
+        {/* Company Grid */}
+        <div className="company-grid">
+          {filteredCompanies.length > 0 ? (
+            filteredCompanies.map((company) => (
+              <CompanyCard
+                key={company.id}
+                company={company}
+                monitoring={monitoringMap[company.id]}
+              />
+            ))
+          ) : (
+            <div className="no-results">No companies match &ldquo;{searchQuery}&rdquo;</div>
+          )}
         </div>
 
         {/* Brand Signature */}

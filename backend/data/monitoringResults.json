@@ -1,11 +1,11 @@
 {
   "summary": {
     "totalMonitored": 140,
-    "up": 110,
+    "up": 113,
     "down": 16,
-    "unknown": 14,
-    "lastRunAt": "2026-11-18T13:31:16.942Z",
-    "isRunning": false
+    "unknown": 11,
+    "lastRunAt": "2026-11-19T16:42:55.267Z",
+    "isRunning": true
   },
   "results": [
     {
@@ -14,8 +14,8 @@
       "careersUrl": "https://www.adobe.com/careers.html",
       "status": "UNKNOWN",
       "httpStatusCode": 403,
-      "responseTimeMs": 428,
-      "lastCheckedAt": "2026-11-18T13:30:00.452Z",
+      "responseTimeMs": 414,
+      "lastCheckedAt": "2026-11-19T16:41:44.700Z",
       "errorMessage": "HTTP 403 (Protected / Inconclusive)",
       "consecutiveFailures": 0
     },
@@ -25,8 +25,8 @@
       "careersUrl": "https://careers.adityabirla.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 688,
-      "lastCheckedAt": "2026-11-18T13:30:00.712Z",
+      "responseTimeMs": 642,
+      "lastCheckedAt": "2026-11-19T16:41:44.927Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -36,8 +36,8 @@
       "careersUrl": "https://www.accenture.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 908,
-      "lastCheckedAt": "2026-11-18T13:30:00.928Z",
+      "responseTimeMs": 1024,
+      "lastCheckedAt": "2026-11-19T16:41:45.277Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -47,10 +47,10 @@
       "careersUrl": "https://careers.adidas.com",
       "status": "DOWN",
       "httpStatusCode": null,
-      "responseTimeMs": 130,
-      "lastCheckedAt": "2026-11-18T13:30:01.181Z",
+      "responseTimeMs": 90,
+      "lastCheckedAt": "2026-11-19T16:41:45.387Z",
       "errorMessage": "Failed after retry: getaddrinfo ENOTFOUND careers.adidas.com",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 6,
@@ -58,8 +58,8 @@
       "careersUrl": "https://www.airtel.in/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 672,
-      "lastCheckedAt": "2026-11-18T13:30:01.124Z",
+      "responseTimeMs": 896,
+      "lastCheckedAt": "2026-11-19T16:41:45.596Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -69,8 +69,8 @@
       "careersUrl": "https://careers.airbnb.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 692,
-      "lastCheckedAt": "2026-11-18T13:30:00.717Z",
+      "responseTimeMs": 1603,
+      "lastCheckedAt": "2026-11-19T16:41:45.890Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -80,8 +80,8 @@
       "careersUrl": "https://www.amd.com/en/corporate/careers.html",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1224,
-      "lastCheckedAt": "2026-11-18T13:30:01.941Z",
+      "responseTimeMs": 736,
+      "lastCheckedAt": "2026-11-19T16:41:46.013Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -91,8 +91,8 @@
       "careersUrl": "https://www.americanexpress.com/en-us/careers",
       "status": "UNKNOWN",
       "httpStatusCode": null,
-      "responseTimeMs": 1426,
-      "lastCheckedAt": "2026-11-18T13:30:02.354Z",
+      "responseTimeMs": 622,
+      "lastCheckedAt": "2026-11-19T16:41:46.009Z",
       "errorMessage": "Parse Error: Header overflow",
       "consecutiveFailures": 0
     },
@@ -102,8 +102,8 @@
       "careersUrl": "https://www.amazon.jobs",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2301,
-      "lastCheckedAt": "2026-11-18T13:30:03.013Z",
+      "responseTimeMs": 2408,
+      "lastCheckedAt": "2026-11-19T16:41:47.335Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -113,8 +113,8 @@
       "careersUrl": "https://www.anthropic.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 707,
-      "lastCheckedAt": "2026-11-18T13:30:01.831Z",
+      "responseTimeMs": 736,
+      "lastCheckedAt": "2026-11-19T16:41:46.332Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -124,8 +124,8 @@
       "careersUrl": "https://www.atlassian.com/company/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1318,
-      "lastCheckedAt": "2026-11-18T13:30:03.259Z",
+      "responseTimeMs": 1127,
+      "lastCheckedAt": "2026-11-19T16:41:47.140Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -135,8 +135,8 @@
       "careersUrl": "https://www.axisbank.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 955,
-      "lastCheckedAt": "2026-11-18T13:30:03.309Z",
+      "responseTimeMs": 862,
+      "lastCheckedAt": "2026-11-19T16:41:47.194Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -146,10 +146,10 @@
       "careersUrl": "https://www.asus.com/careers/",
       "status": "DOWN",
       "httpStatusCode": 404,
-      "responseTimeMs": 960,
-      "lastCheckedAt": "2026-11-18T13:30:03.903Z",
+      "responseTimeMs": 1357,
+      "lastCheckedAt": "2026-11-19T16:41:48.797Z",
       "errorMessage": "Failed after retry: Outage",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 11,
@@ -157,8 +157,8 @@
       "careersUrl": "https://jobs.apple.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2613,
-      "lastCheckedAt": "2026-11-18T13:30:03.794Z",
+      "responseTimeMs": 4743,
+      "lastCheckedAt": "2026-11-19T16:41:50.633Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -168,8 +168,8 @@
       "careersUrl": "https://careers.bankofamerica.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 3381,
-      "lastCheckedAt": "2026-11-18T13:30:06.394Z",
+      "responseTimeMs": 1663,
+      "lastCheckedAt": "2026-11-19T16:41:48.803Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -179,8 +179,8 @@
       "careersUrl": "https://home.barclays/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 994,
-      "lastCheckedAt": "2026-11-18T13:30:04.253Z",
+      "responseTimeMs": 1726,
+      "lastCheckedAt": "2026-11-19T16:41:48.920Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -190,8 +190,8 @@
       "careersUrl": "https://blinkit.com/careers",
       "status": "UNKNOWN",
       "httpStatusCode": 403,
-      "responseTimeMs": 366,
-      "lastCheckedAt": "2026-11-18T13:30:04.269Z",
+      "responseTimeMs": 771,
+      "lastCheckedAt": "2026-11-19T16:41:49.574Z",
       "errorMessage": "HTTP 403 (Protected / Inconclusive)",
       "consecutiveFailures": 0
     },
@@ -201,8 +201,8 @@
       "careersUrl": "https://www.birlasoft.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 625,
-      "lastCheckedAt": "2026-11-18T13:30:03.934Z",
+      "responseTimeMs": 1723,
+      "lastCheckedAt": "2026-11-19T16:41:49.058Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -212,8 +212,8 @@
       "careersUrl": "https://careers.blackrock.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1552,
-      "lastCheckedAt": "2026-11-18T13:30:05.346Z",
+      "responseTimeMs": 641,
+      "lastCheckedAt": "2026-11-19T16:41:49.438Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -223,8 +223,8 @@
       "careersUrl": "https://jobs.boeing.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1011,
-      "lastCheckedAt": "2026-11-18T13:30:05.264Z",
+      "responseTimeMs": 1071,
+      "lastCheckedAt": "2026-11-19T16:41:50.129Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -234,8 +234,8 @@
       "careersUrl": "https://www.brex.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 471,
-      "lastCheckedAt": "2026-11-18T13:30:05.735Z",
+      "responseTimeMs": 686,
+      "lastCheckedAt": "2026-11-19T16:41:50.260Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -245,8 +245,8 @@
       "careersUrl": "https://www.bosch.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1665,
-      "lastCheckedAt": "2026-11-18T13:30:05.934Z",
+      "responseTimeMs": 928,
+      "lastCheckedAt": "2026-11-19T16:41:50.366Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -256,10 +256,10 @@
       "careersUrl": "https://careers.rakuten.com",
       "status": "DOWN",
       "httpStatusCode": null,
-      "responseTimeMs": 79,
-      "lastCheckedAt": "2026-11-18T13:30:06.820Z",
+      "responseTimeMs": 105,
+      "lastCheckedAt": "2026-11-19T16:41:51.375Z",
       "errorMessage": "Failed after retry: getaddrinfo ENOTFOUND careers.rakuten.com",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 20,
@@ -267,10 +267,10 @@
       "careersUrl": "https://www.bny.com/en/careers.html",
       "status": "DOWN",
       "httpStatusCode": 404,
-      "responseTimeMs": 2405,
-      "lastCheckedAt": "2026-11-18T13:30:07.451Z",
+      "responseTimeMs": 916,
+      "lastCheckedAt": "2026-11-19T16:41:50.926Z",
       "errorMessage": "Failed after retry: Outage",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 27,
@@ -278,8 +278,8 @@
       "careersUrl": "https://www.capgemini.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1329,
-      "lastCheckedAt": "2026-11-18T13:30:07.723Z",
+      "responseTimeMs": 1400,
+      "lastCheckedAt": "2026-11-19T16:41:52.033Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -289,8 +289,8 @@
       "careersUrl": "https://www.chargebee.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 525,
-      "lastCheckedAt": "2026-11-18T13:30:07.345Z",
+      "responseTimeMs": 758,
+      "lastCheckedAt": "2026-11-19T16:41:51.684Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -300,8 +300,8 @@
       "careersUrl": "https://www.checkout.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 376,
-      "lastCheckedAt": "2026-11-18T13:30:07.721Z",
+      "responseTimeMs": 341,
+      "lastCheckedAt": "2026-11-19T16:41:51.470Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -311,8 +311,8 @@
       "careersUrl": "https://www.canva.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2672,
-      "lastCheckedAt": "2026-11-18T13:30:08.606Z",
+      "responseTimeMs": 2738,
+      "lastCheckedAt": "2026-11-19T16:41:53.104Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -322,8 +322,8 @@
       "careersUrl": "https://jobs.citi.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 821,
-      "lastCheckedAt": "2026-11-18T13:30:08.542Z",
+      "responseTimeMs": 359,
+      "lastCheckedAt": "2026-11-19T16:41:51.829Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -333,8 +333,8 @@
       "careersUrl": "https://www.coca-colacompany.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 812,
-      "lastCheckedAt": "2026-11-18T13:30:08.535Z",
+      "responseTimeMs": 793,
+      "lastCheckedAt": "2026-11-19T16:41:52.477Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -342,11 +342,11 @@
       "companyId": 35,
       "companyName": "Coinbase",
       "careersUrl": "https://www.coinbase.com/careers",
-      "status": "UNKNOWN",
-      "httpStatusCode": null,
-      "responseTimeMs": 278,
-      "lastCheckedAt": "2026-11-18T13:30:08.884Z",
-      "errorMessage": "read ECONNRESET",
+      "status": "UP",
+      "httpStatusCode": 200,
+      "responseTimeMs": 1352,
+      "lastCheckedAt": "2026-11-19T16:41:53.829Z",
+      "errorMessage": null,
       "consecutiveFailures": 0
     },
     {
@@ -355,8 +355,8 @@
       "careersUrl": "https://careers.cognizant.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 967,
-      "lastCheckedAt": "2026-11-18T13:30:09.509Z",
+      "responseTimeMs": 1058,
+      "lastCheckedAt": "2026-11-19T16:41:53.091Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -366,8 +366,8 @@
       "careersUrl": "https://www.coforge.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2291,
-      "lastCheckedAt": "2026-11-18T13:30:10.826Z",
+      "responseTimeMs": 1921,
+      "lastCheckedAt": "2026-11-19T16:41:53.750Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -377,8 +377,8 @@
       "careersUrl": "https://jobs.cisco.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1955,
-      "lastCheckedAt": "2026-11-18T13:30:09.406Z",
+      "responseTimeMs": 2556,
+      "lastCheckedAt": "2026-11-19T16:41:53.931Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -388,8 +388,8 @@
       "careersUrl": "https://www.confluent.io/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1619,
-      "lastCheckedAt": "2026-11-18T13:30:10.503Z",
+      "responseTimeMs": 1445,
+      "lastCheckedAt": "2026-11-19T16:41:54.536Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -399,10 +399,10 @@
       "careersUrl": "https://cred.club/careers",
       "status": "DOWN",
       "httpStatusCode": 404,
-      "responseTimeMs": 274,
-      "lastCheckedAt": "2026-11-18T13:30:10.739Z",
+      "responseTimeMs": 473,
+      "lastCheckedAt": "2026-11-19T16:41:54.711Z",
       "errorMessage": "Failed after retry: Outage",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 38,
@@ -410,8 +410,8 @@
       "careersUrl": "https://www.crowdstrike.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1562,
-      "lastCheckedAt": "2026-11-18T13:30:11.071Z",
+      "responseTimeMs": 1841,
+      "lastCheckedAt": "2026-11-19T16:41:55.591Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -421,8 +421,8 @@
       "careersUrl": "https://delhivery.com/careers",
       "status": "UNKNOWN",
       "httpStatusCode": null,
-      "responseTimeMs": 111,
-      "lastCheckedAt": "2026-11-18T13:30:10.850Z",
+      "responseTimeMs": 231,
+      "lastCheckedAt": "2026-11-19T16:41:54.162Z",
       "errorMessage": "Hostname/IP does not match certificate's altnames: Host: delhivery.com. is not in the cert's altnames: DNS:*.delhivery.com",
       "consecutiveFailures": 0
     },
@@ -432,8 +432,8 @@
       "careersUrl": "https://www.databricks.com/company/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 408,
-      "lastCheckedAt": "2026-11-18T13:30:10.911Z",
+      "responseTimeMs": 506,
+      "lastCheckedAt": "2026-11-19T16:41:54.335Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -443,8 +443,8 @@
       "careersUrl": "https://www2.deloitte.com/global/en/careers.html",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 602,
-      "lastCheckedAt": "2026-11-18T13:30:11.452Z",
+      "responseTimeMs": 1253,
+      "lastCheckedAt": "2026-11-19T16:41:55.589Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -454,8 +454,8 @@
       "careersUrl": "https://jobs.dell.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 3209,
-      "lastCheckedAt": "2026-11-18T13:30:14.035Z",
+      "responseTimeMs": 4117,
+      "lastCheckedAt": "2026-11-19T16:41:58.279Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -465,8 +465,8 @@
       "careersUrl": "https://www.epam.com/careers",
       "status": "UNKNOWN",
       "httpStatusCode": 403,
-      "responseTimeMs": 245,
-      "lastCheckedAt": "2026-11-18T13:30:13.714Z",
+      "responseTimeMs": 427,
+      "lastCheckedAt": "2026-11-19T16:41:56.018Z",
       "errorMessage": "HTTP 403 (Protected / Inconclusive)",
       "consecutiveFailures": 0
     },
@@ -476,8 +476,8 @@
       "careersUrl": "https://jobs.dropbox.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2829,
-      "lastCheckedAt": "2026-11-18T13:30:13.740Z",
+      "responseTimeMs": 4652,
+      "lastCheckedAt": "2026-11-19T16:41:59.188Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -485,11 +485,11 @@
       "companyId": 48,
       "companyName": "Fidelity Investments",
       "careersUrl": "https://jobs.fidelity.com",
-      "status": "UNKNOWN",
-      "httpStatusCode": null,
-      "responseTimeMs": 307,
-      "lastCheckedAt": "2026-11-18T13:30:14.047Z",
-      "errorMessage": "read ECONNRESET",
+      "status": "UP",
+      "httpStatusCode": 200,
+      "responseTimeMs": 2244,
+      "lastCheckedAt": "2026-11-19T16:41:58.262Z",
+      "errorMessage": null,
       "consecutiveFailures": 0
     },
     {
@@ -498,10 +498,10 @@
       "careersUrl": "https://careers.fanaticsinc.com",
       "status": "DOWN",
       "httpStatusCode": null,
-      "responseTimeMs": 203,
-      "lastCheckedAt": "2026-11-18T13:30:14.933Z",
+      "responseTimeMs": 351,
+      "lastCheckedAt": "2026-11-19T16:41:57.227Z",
       "errorMessage": "Failed after retry: getaddrinfo ENOTFOUND careers.fanaticsinc.com",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 45,
@@ -509,8 +509,8 @@
       "careersUrl": "https://www.elastic.co/about/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2017,
-      "lastCheckedAt": "2026-11-18T13:30:13.469Z",
+      "responseTimeMs": 2406,
+      "lastCheckedAt": "2026-11-19T16:41:57.995Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -520,8 +520,8 @@
       "careersUrl": "https://www.flipkartcareers.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 583,
-      "lastCheckedAt": "2026-11-18T13:30:15.516Z",
+      "responseTimeMs": 533,
+      "lastCheckedAt": "2026-11-19T16:41:58.795Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -531,8 +531,8 @@
       "careersUrl": "https://www.figma.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1149,
-      "lastCheckedAt": "2026-11-18T13:30:15.184Z",
+      "responseTimeMs": 2695,
+      "lastCheckedAt": "2026-11-19T16:41:59.922Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -542,8 +542,8 @@
       "careersUrl": "https://foodhub.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 429,
-      "lastCheckedAt": "2026-11-18T13:30:15.613Z",
+      "responseTimeMs": 533,
+      "lastCheckedAt": "2026-11-19T16:41:58.812Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -553,8 +553,8 @@
       "careersUrl": "https://fiverings.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 3779,
-      "lastCheckedAt": "2026-11-18T13:30:17.826Z",
+      "responseTimeMs": 4100,
+      "lastCheckedAt": "2026-11-19T16:42:02.095Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -564,8 +564,8 @@
       "careersUrl": "https://fractal.ai/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2167,
-      "lastCheckedAt": "2026-11-18T13:30:17.683Z",
+      "responseTimeMs": 2931,
+      "lastCheckedAt": "2026-11-19T16:42:01.726Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -575,10 +575,10 @@
       "careersUrl": "https://www.dunzo.com/careers",
       "status": "DOWN",
       "httpStatusCode": null,
-      "responseTimeMs": 10007,
-      "lastCheckedAt": "2026-11-18T13:30:22.090Z",
-      "errorMessage": "Failed after retry: getaddrinfo EAI_AGAIN www.dunzo.com",
-      "consecutiveFailures": 2
+      "responseTimeMs": 87,
+      "lastCheckedAt": "2026-11-19T16:41:55.805Z",
+      "errorMessage": "Failed after retry: connect ECONNREFUSED 127.0.0.1:443",
+      "consecutiveFailures": 4
     },
     {
       "companyId": 55,
@@ -586,10 +586,10 @@
       "careersUrl": "https://jobs.geaerospace.com",
       "status": "DOWN",
       "httpStatusCode": null,
-      "responseTimeMs": 61,
-      "lastCheckedAt": "2026-11-18T13:30:18.757Z",
+      "responseTimeMs": 94,
+      "lastCheckedAt": "2026-11-19T16:42:00.299Z",
       "errorMessage": "Failed after retry: getaddrinfo ENOTFOUND jobs.geaerospace.com",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 57,
@@ -597,8 +597,8 @@
       "careersUrl": "https://www.goldmansachs.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 607,
-      "lastCheckedAt": "2026-11-18T13:30:19.364Z",
+      "responseTimeMs": 716,
+      "lastCheckedAt": "2026-11-19T16:42:01.015Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -606,11 +606,11 @@
       "companyId": 59,
       "companyName": "Groww",
       "careersUrl": "https://groww.in/careers",
-      "status": "UNKNOWN",
-      "httpStatusCode": null,
-      "responseTimeMs": 70,
-      "lastCheckedAt": "2026-11-18T13:30:20.480Z",
-      "errorMessage": "read ECONNRESET",
+      "status": "UP",
+      "httpStatusCode": 200,
+      "responseTimeMs": 320,
+      "lastCheckedAt": "2026-11-19T16:42:01.892Z",
+      "errorMessage": null,
       "consecutiveFailures": 0
     },
     {
@@ -619,10 +619,10 @@
       "careersUrl": "https://www.freshworks.com/careers",
       "status": "DOWN",
       "httpStatusCode": 404,
-      "responseTimeMs": 3778,
-      "lastCheckedAt": "2026-11-18T13:30:20.513Z",
+      "responseTimeMs": 3157,
+      "lastCheckedAt": "2026-11-19T16:42:03.067Z",
       "errorMessage": "Failed after retry: Outage",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 56,
@@ -630,8 +630,8 @@
       "careersUrl": "https://www.gep.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2584,
-      "lastCheckedAt": "2026-11-18T13:30:20.410Z",
+      "responseTimeMs": 1650,
+      "lastCheckedAt": "2026-11-19T16:42:01.572Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -641,8 +641,8 @@
       "careersUrl": "https://jobs.hp.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 253,
-      "lastCheckedAt": "2026-11-18T13:30:22.252Z",
+      "responseTimeMs": 411,
+      "lastCheckedAt": "2026-11-19T16:42:02.507Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -652,8 +652,8 @@
       "careersUrl": "https://careers.google.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2635,
-      "lastCheckedAt": "2026-11-18T13:30:21.999Z",
+      "responseTimeMs": 3060,
+      "lastCheckedAt": "2026-11-19T16:42:04.075Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -663,8 +663,8 @@
       "careersUrl": "https://hexaware.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1753,
-      "lastCheckedAt": "2026-11-18T13:30:22.266Z",
+      "responseTimeMs": 1709,
+      "lastCheckedAt": "2026-11-19T16:42:03.601Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -674,8 +674,8 @@
       "careersUrl": "https://www.hsbc.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 485,
-      "lastCheckedAt": "2026-11-18T13:30:22.575Z",
+      "responseTimeMs": 365,
+      "lastCheckedAt": "2026-11-19T16:42:02.872Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -685,8 +685,8 @@
       "careersUrl": "https://www.ibm.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 662,
-      "lastCheckedAt": "2026-11-18T13:30:22.914Z",
+      "responseTimeMs": 489,
+      "lastCheckedAt": "2026-11-19T16:42:03.361Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -696,8 +696,8 @@
       "careersUrl": "https://www.indianbank.in/career",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 210,
-      "lastCheckedAt": "2026-11-18T13:30:22.476Z",
+      "responseTimeMs": 482,
+      "lastCheckedAt": "2026-11-19T16:42:03.549Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -707,8 +707,8 @@
       "careersUrl": "https://www.infosys.com/careers",
       "status": "UNKNOWN",
       "httpStatusCode": 403,
-      "responseTimeMs": 502,
-      "lastCheckedAt": "2026-11-18T13:30:23.077Z",
+      "responseTimeMs": 608,
+      "lastCheckedAt": "2026-11-19T16:42:04.157Z",
       "errorMessage": "HTTP 403 (Protected / Inconclusive)",
       "consecutiveFailures": 0
     },
@@ -718,8 +718,8 @@
       "careersUrl": "https://www.infineon.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 437,
-      "lastCheckedAt": "2026-11-18T13:30:22.913Z",
+      "responseTimeMs": 631,
+      "lastCheckedAt": "2026-11-19T16:42:03.992Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -729,8 +729,8 @@
       "careersUrl": "https://www.hcltech.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 3281,
-      "lastCheckedAt": "2026-11-18T13:30:23.761Z",
+      "responseTimeMs": 3611,
+      "lastCheckedAt": "2026-11-19T16:42:05.337Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -740,8 +740,8 @@
       "careersUrl": "https://www.inmobi.com/company/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 930,
-      "lastCheckedAt": "2026-11-18T13:30:23.843Z",
+      "responseTimeMs": 1408,
+      "lastCheckedAt": "2026-11-19T16:42:05.009Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -751,8 +751,8 @@
       "careersUrl": "https://www.isro.gov.in/Careers.html",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 126,
-      "lastCheckedAt": "2026-11-18T13:30:23.564Z",
+      "responseTimeMs": 637,
+      "lastCheckedAt": "2026-11-19T16:42:04.794Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -762,8 +762,8 @@
       "careersUrl": "https://jobs.intuit.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 361,
-      "lastCheckedAt": "2026-11-18T13:30:23.438Z",
+      "responseTimeMs": 787,
+      "lastCheckedAt": "2026-11-19T16:42:04.862Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -773,8 +773,8 @@
       "careersUrl": "https://www.browserstack.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 54192,
-      "lastCheckedAt": "2026-11-18T13:30:59.538Z",
+      "responseTimeMs": 1000,
+      "lastCheckedAt": "2026-11-19T16:41:51.129Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -784,8 +784,8 @@
       "careersUrl": "https://jobs.intel.com",
       "status": "UNKNOWN",
       "httpStatusCode": 403,
-      "responseTimeMs": 2284,
-      "lastCheckedAt": "2026-11-18T13:30:25.198Z",
+      "responseTimeMs": 1994,
+      "lastCheckedAt": "2026-11-19T16:42:05.986Z",
       "errorMessage": "HTTP 403 (Protected / Inconclusive)",
       "consecutiveFailures": 0
     },
@@ -795,8 +795,8 @@
       "careersUrl": "https://careers.jio.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 923,
-      "lastCheckedAt": "2026-11-18T13:30:24.684Z",
+      "responseTimeMs": 730,
+      "lastCheckedAt": "2026-11-19T16:42:05.592Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -806,8 +806,8 @@
       "careersUrl": "https://www.janestreet.com/join-jane-street",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2129,
-      "lastCheckedAt": "2026-11-18T13:30:25.693Z",
+      "responseTimeMs": 1965,
+      "lastCheckedAt": "2026-11-19T16:42:06.759Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -817,8 +817,8 @@
       "careersUrl": "https://kpmg.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 336,
-      "lastCheckedAt": "2026-11-18T13:30:25.435Z",
+      "responseTimeMs": 697,
+      "lastCheckedAt": "2026-11-19T16:42:06.289Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -828,8 +828,8 @@
       "careersUrl": "https://juspay.in/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 415,
-      "lastCheckedAt": "2026-11-18T13:30:25.099Z",
+      "responseTimeMs": 853,
+      "lastCheckedAt": "2026-11-19T16:42:06.190Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -839,8 +839,8 @@
       "careersUrl": "https://www.ltts.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 484,
-      "lastCheckedAt": "2026-11-18T13:30:25.682Z",
+      "responseTimeMs": 380,
+      "lastCheckedAt": "2026-11-19T16:42:06.366Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -850,10 +850,10 @@
       "careersUrl": "https://www.lavamobiles.com/careers",
       "status": "DOWN",
       "httpStatusCode": 404,
-      "responseTimeMs": 638,
-      "lastCheckedAt": "2026-11-18T13:30:27.242Z",
+      "responseTimeMs": 635,
+      "lastCheckedAt": "2026-11-19T16:42:08.063Z",
       "errorMessage": "Failed after retry: Outage",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 81,
@@ -861,8 +861,8 @@
       "careersUrl": "https://careers.mastercard.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2313,
-      "lastCheckedAt": "2026-11-18T13:30:28.006Z",
+      "responseTimeMs": 2419,
+      "lastCheckedAt": "2026-11-19T16:42:08.785Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -872,8 +872,8 @@
       "careersUrl": "https://careers.jpmorgan.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 3173,
-      "lastCheckedAt": "2026-11-18T13:30:27.016Z",
+      "responseTimeMs": 3610,
+      "lastCheckedAt": "2026-11-19T16:42:08.619Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -883,10 +883,10 @@
       "careersUrl": "https://meesho.io/careers",
       "status": "DOWN",
       "httpStatusCode": 404,
-      "responseTimeMs": 1056,
-      "lastCheckedAt": "2026-11-18T13:30:29.930Z",
+      "responseTimeMs": 1054,
+      "lastCheckedAt": "2026-11-19T16:42:09.377Z",
       "errorMessage": "Failed after retry: Outage",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 80,
@@ -894,8 +894,8 @@
       "careersUrl": "https://www.ltimindtree.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1393,
-      "lastCheckedAt": "2026-11-18T13:30:27.075Z",
+      "responseTimeMs": 2434,
+      "lastCheckedAt": "2026-11-19T16:42:08.723Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -905,8 +905,8 @@
       "careersUrl": "https://careers.microsoft.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 283,
-      "lastCheckedAt": "2026-11-18T13:30:27.525Z",
+      "responseTimeMs": 725,
+      "lastCheckedAt": "2026-11-19T16:42:09.344Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -916,8 +916,8 @@
       "careersUrl": "https://www.morganstanley.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 558,
-      "lastCheckedAt": "2026-11-18T13:30:28.005Z",
+      "responseTimeMs": 1030,
+      "lastCheckedAt": "2026-11-19T16:42:09.753Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -927,8 +927,8 @@
       "careersUrl": "https://careers.mphasis.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 708,
-      "lastCheckedAt": "2026-11-18T13:30:28.233Z",
+      "responseTimeMs": 1347,
+      "lastCheckedAt": "2026-11-19T16:42:10.093Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -938,8 +938,8 @@
       "careersUrl": "https://nielseniq.com/global/en/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1710,
-      "lastCheckedAt": "2026-11-18T13:30:29.716Z",
+      "responseTimeMs": 1723,
+      "lastCheckedAt": "2026-11-19T16:42:11.067Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -949,8 +949,8 @@
       "careersUrl": "https://www.nasa.gov/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1776,
-      "lastCheckedAt": "2026-11-18T13:30:29.781Z",
+      "responseTimeMs": 1451,
+      "lastCheckedAt": "2026-11-19T16:42:10.236Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -960,8 +960,8 @@
       "careersUrl": "https://www.nokia.com/about-us/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2249,
-      "lastCheckedAt": "2026-11-18T13:30:30.482Z",
+      "responseTimeMs": 1194,
+      "lastCheckedAt": "2026-11-19T16:42:10.571Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -971,8 +971,8 @@
       "careersUrl": "https://www.nvidia.com/en-us/about-nvidia/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1234,
-      "lastCheckedAt": "2026-11-18T13:30:31.015Z",
+      "responseTimeMs": 730,
+      "lastCheckedAt": "2026-11-19T16:42:10.823Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -982,8 +982,8 @@
       "careersUrl": "https://openai.com/careers",
       "status": "UNKNOWN",
       "httpStatusCode": 403,
-      "responseTimeMs": 498,
-      "lastCheckedAt": "2026-11-18T13:30:31.513Z",
+      "responseTimeMs": 326,
+      "lastCheckedAt": "2026-11-19T16:42:11.149Z",
       "errorMessage": "HTTP 403 (Protected / Inconclusive)",
       "consecutiveFailures": 0
     },
@@ -993,8 +993,8 @@
       "careersUrl": "https://www.metacareers.com",
       "status": "UNKNOWN",
       "httpStatusCode": 400,
-      "responseTimeMs": 372,
-      "lastCheckedAt": "2026-11-18T13:30:27.447Z",
+      "responseTimeMs": 683,
+      "lastCheckedAt": "2026-11-19T16:42:08.746Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1004,8 +1004,8 @@
       "careersUrl": "https://www.olacabs.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 934,
-      "lastCheckedAt": "2026-11-18T13:30:31.416Z",
+      "responseTimeMs": 648,
+      "lastCheckedAt": "2026-11-19T16:42:11.219Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1015,8 +1015,8 @@
       "careersUrl": "https://www.okta.com/company/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1407,
-      "lastCheckedAt": "2026-11-18T13:30:31.338Z",
+      "responseTimeMs": 945,
+      "lastCheckedAt": "2026-11-19T16:42:11.181Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1026,8 +1026,8 @@
       "careersUrl": "https://www.nutanix.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 4037,
-      "lastCheckedAt": "2026-11-18T13:30:33.753Z",
+      "responseTimeMs": 3099,
+      "lastCheckedAt": "2026-11-19T16:42:12.852Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1037,8 +1037,8 @@
       "careersUrl": "https://www.oracle.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 609,
-      "lastCheckedAt": "2026-11-18T13:30:31.947Z",
+      "responseTimeMs": 590,
+      "lastCheckedAt": "2026-11-19T16:42:11.657Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1048,8 +1048,8 @@
       "careersUrl": "https://paytm.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 518,
-      "lastCheckedAt": "2026-11-18T13:30:32.278Z",
+      "responseTimeMs": 792,
+      "lastCheckedAt": "2026-11-19T16:42:12.011Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1059,8 +1059,8 @@
       "careersUrl": "https://www.phonepe.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 468,
-      "lastCheckedAt": "2026-11-18T13:30:33.349Z",
+      "responseTimeMs": 903,
+      "lastCheckedAt": "2026-11-19T16:42:13.607Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1070,8 +1070,8 @@
       "careersUrl": "https://www.palantir.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 344,
-      "lastCheckedAt": "2026-11-18T13:30:31.760Z",
+      "responseTimeMs": 1570,
+      "lastCheckedAt": "2026-11-19T16:42:12.719Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1081,8 +1081,8 @@
       "careersUrl": "https://careers.pypl.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1367,
-      "lastCheckedAt": "2026-11-18T13:30:32.880Z",
+      "responseTimeMs": 1523,
+      "lastCheckedAt": "2026-11-19T16:42:12.704Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1092,8 +1092,8 @@
       "careersUrl": "https://www.persistent.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1824,
-      "lastCheckedAt": "2026-11-18T13:30:34.102Z",
+      "responseTimeMs": 1955,
+      "lastCheckedAt": "2026-11-19T16:42:13.966Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1103,8 +1103,8 @@
       "careersUrl": "https://careers.publicissapient.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 499,
-      "lastCheckedAt": "2026-11-18T13:30:34.601Z",
+      "responseTimeMs": 518,
+      "lastCheckedAt": "2026-11-19T16:42:14.125Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1114,8 +1114,8 @@
       "careersUrl": "https://www.postman.com/company/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1050,
-      "lastCheckedAt": "2026-11-18T13:30:34.803Z",
+      "responseTimeMs": 2186,
+      "lastCheckedAt": "2026-11-19T16:42:15.038Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1125,8 +1125,8 @@
       "careersUrl": "https://www.pepsicojobs.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 3036,
-      "lastCheckedAt": "2026-11-18T13:30:34.983Z",
+      "responseTimeMs": 4794,
+      "lastCheckedAt": "2026-11-19T16:42:16.452Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1136,8 +1136,8 @@
       "careersUrl": "https://www.qualcomm.com/company/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 263,
-      "lastCheckedAt": "2026-11-18T13:30:34.864Z",
+      "responseTimeMs": 296,
+      "lastCheckedAt": "2026-11-19T16:42:14.262Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1147,8 +1147,8 @@
       "careersUrl": "https://razorpay.com/jobs",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 659,
-      "lastCheckedAt": "2026-11-18T13:30:35.462Z",
+      "responseTimeMs": 1139,
+      "lastCheckedAt": "2026-11-19T16:42:15.264Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1158,8 +1158,8 @@
       "careersUrl": "https://plaid.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1733,
-      "lastCheckedAt": "2026-11-18T13:30:35.082Z",
+      "responseTimeMs": 2232,
+      "lastCheckedAt": "2026-11-19T16:42:14.951Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1169,8 +1169,8 @@
       "careersUrl": "https://www.redditinc.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 718,
-      "lastCheckedAt": "2026-11-18T13:30:35.582Z",
+      "responseTimeMs": 2761,
+      "lastCheckedAt": "2026-11-19T16:42:17.023Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1180,10 +1180,10 @@
       "careersUrl": "https://www.ril.com/Careers.aspx",
       "status": "DOWN",
       "httpStatusCode": 404,
-      "responseTimeMs": 1367,
-      "lastCheckedAt": "2026-11-18T13:30:37.533Z",
+      "responseTimeMs": 1268,
+      "lastCheckedAt": "2026-11-19T16:42:17.339Z",
       "errorMessage": "Failed after retry: Outage",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 110,
@@ -1191,8 +1191,8 @@
       "careersUrl": "https://www.zscaler.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1111,
-      "lastCheckedAt": "2026-11-18T13:30:36.573Z",
+      "responseTimeMs": 1790,
+      "lastCheckedAt": "2026-11-19T16:42:17.054Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1202,8 +1202,8 @@
       "careersUrl": "https://www.salesforce.com/company/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 869,
-      "lastCheckedAt": "2026-11-18T13:30:36.451Z",
+      "responseTimeMs": 1627,
+      "lastCheckedAt": "2026-11-19T16:42:17.791Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1213,8 +1213,8 @@
       "careersUrl": "https://careers.rolls-royce.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1951,
-      "lastCheckedAt": "2026-11-18T13:30:37.033Z",
+      "responseTimeMs": 1126,
+      "lastCheckedAt": "2026-11-19T16:42:16.164Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1224,8 +1224,8 @@
       "careersUrl": "https://www.samsung.com/us/aboutsamsung/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2590,
-      "lastCheckedAt": "2026-11-18T13:30:39.041Z",
+      "responseTimeMs": 1853,
+      "lastCheckedAt": "2026-11-19T16:42:18.306Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1235,8 +1235,8 @@
       "careersUrl": "https://sierra.ai/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1047,
-      "lastCheckedAt": "2026-11-18T13:30:38.522Z",
+      "responseTimeMs": 1379,
+      "lastCheckedAt": "2026-11-19T16:42:19.125Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1246,8 +1246,8 @@
       "careersUrl": "https://sbi.co.in/web/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 442,
-      "lastCheckedAt": "2026-11-18T13:30:37.475Z",
+      "responseTimeMs": 780,
+      "lastCheckedAt": "2026-11-19T16:42:17.834Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1257,8 +1257,8 @@
       "careersUrl": "https://jobs.sap.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 597,
-      "lastCheckedAt": "2026-11-18T13:30:37.170Z",
+      "responseTimeMs": 723,
+      "lastCheckedAt": "2026-11-19T16:42:17.746Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1268,8 +1268,8 @@
       "careersUrl": "https://careers.swiggy.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 523,
-      "lastCheckedAt": "2026-11-18T13:30:39.564Z",
+      "responseTimeMs": 898,
+      "lastCheckedAt": "2026-11-19T16:42:19.548Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1279,8 +1279,8 @@
       "careersUrl": "https://www.sliceit.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 499,
-      "lastCheckedAt": "2026-11-18T13:30:38.032Z",
+      "responseTimeMs": 859,
+      "lastCheckedAt": "2026-11-19T16:42:18.650Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1290,8 +1290,8 @@
       "careersUrl": "https://corporate.target.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 412,
-      "lastCheckedAt": "2026-11-18T13:30:39.976Z",
+      "responseTimeMs": 425,
+      "lastCheckedAt": "2026-11-19T16:42:19.550Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1301,8 +1301,8 @@
       "careersUrl": "https://www.tcs.com/careers",
       "status": "UNKNOWN",
       "httpStatusCode": 403,
-      "responseTimeMs": 222,
-      "lastCheckedAt": "2026-11-18T13:30:40.632Z",
+      "responseTimeMs": 556,
+      "lastCheckedAt": "2026-11-19T16:42:20.106Z",
       "errorMessage": "HTTP 403 (Protected / Inconclusive)",
       "consecutiveFailures": 0
     },
@@ -1312,8 +1312,8 @@
       "careersUrl": "https://stripe.com/jobs",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1888,
-      "lastCheckedAt": "2026-11-18T13:30:40.410Z",
+      "responseTimeMs": 2349,
+      "lastCheckedAt": "2026-11-19T16:42:20.655Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1323,8 +1323,8 @@
       "careersUrl": "https://www.tataelxsi.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 525,
-      "lastCheckedAt": "2026-11-18T13:30:40.501Z",
+      "responseTimeMs": 1239,
+      "lastCheckedAt": "2026-11-19T16:42:20.787Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1334,8 +1334,8 @@
       "careersUrl": "https://www.tesla.com/careers",
       "status": "UNKNOWN",
       "httpStatusCode": 403,
-      "responseTimeMs": 272,
-      "lastCheckedAt": "2026-11-18T13:30:40.904Z",
+      "responseTimeMs": 377,
+      "lastCheckedAt": "2026-11-19T16:42:21.032Z",
       "errorMessage": "HTTP 403 (Protected / Inconclusive)",
       "consecutiveFailures": 0
     },
@@ -1345,8 +1345,8 @@
       "careersUrl": "https://careers.snowflake.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 4403,
-      "lastCheckedAt": "2026-11-18T13:30:42.435Z",
+      "responseTimeMs": 3428,
+      "lastCheckedAt": "2026-11-19T16:42:21.263Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1356,8 +1356,8 @@
       "careersUrl": "https://careers.techmahindra.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 327,
-      "lastCheckedAt": "2026-11-18T13:30:40.828Z",
+      "responseTimeMs": 919,
+      "lastCheckedAt": "2026-11-19T16:42:21.025Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1367,8 +1367,8 @@
       "careersUrl": "https://www.thoughtworks.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 338,
-      "lastCheckedAt": "2026-11-18T13:30:41.166Z",
+      "responseTimeMs": 474,
+      "lastCheckedAt": "2026-11-19T16:42:21.261Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1378,10 +1378,10 @@
       "careersUrl": "https://www.turing.com/careers",
       "status": "DOWN",
       "httpStatusCode": 404,
-      "responseTimeMs": 713,
-      "lastCheckedAt": "2026-11-18T13:30:43.188Z",
+      "responseTimeMs": 1088,
+      "lastCheckedAt": "2026-11-19T16:42:23.720Z",
       "errorMessage": "Failed after retry: Outage",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 130,
@@ -1389,8 +1389,8 @@
       "careersUrl": "https://careers.x.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1449,
-      "lastCheckedAt": "2026-11-18T13:30:44.637Z",
+      "responseTimeMs": 1203,
+      "lastCheckedAt": "2026-11-19T16:42:22.467Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1400,8 +1400,8 @@
       "careersUrl": "https://www.uipath.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 541,
-      "lastCheckedAt": "2026-11-18T13:30:46.078Z",
+      "responseTimeMs": 937,
+      "lastCheckedAt": "2026-11-19T16:42:24.657Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1411,8 +1411,8 @@
       "careersUrl": "https://www.uber.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1274,
-      "lastCheckedAt": "2026-11-18T13:30:45.912Z",
+      "responseTimeMs": 1779,
+      "lastCheckedAt": "2026-11-19T16:42:24.246Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1422,8 +1422,8 @@
       "careersUrl": "https://www.twilio.com/company/jobs",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 3102,
-      "lastCheckedAt": "2026-11-18T13:30:45.537Z",
+      "responseTimeMs": 3398,
+      "lastCheckedAt": "2026-11-19T16:42:24.659Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1433,10 +1433,10 @@
       "careersUrl": "https://www.turnitin.com/careers",
       "status": "DOWN",
       "httpStatusCode": 404,
-      "responseTimeMs": 2403,
-      "lastCheckedAt": "2026-11-18T13:30:47.128Z",
+      "responseTimeMs": 2497,
+      "lastCheckedAt": "2026-11-19T16:42:26.190Z",
       "errorMessage": "Failed after retry: Outage",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 134,
@@ -1444,8 +1444,8 @@
       "careersUrl": "https://careers.walmart.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 898,
-      "lastCheckedAt": "2026-11-18T13:30:46.976Z",
+      "responseTimeMs": 2129,
+      "lastCheckedAt": "2026-11-19T16:42:26.786Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1455,8 +1455,8 @@
       "careersUrl": "https://www.wellsfargo.com/about/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 1620,
-      "lastCheckedAt": "2026-11-18T13:30:48.596Z",
+      "responseTimeMs": 1900,
+      "lastCheckedAt": "2026-11-19T16:42:26.559Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1466,8 +1466,8 @@
       "careersUrl": "https://www.workday.com/en-us/company/careers.html",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 557,
-      "lastCheckedAt": "2026-11-18T13:30:49.153Z",
+      "responseTimeMs": 911,
+      "lastCheckedAt": "2026-11-19T16:42:27.470Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1477,8 +1477,8 @@
       "careersUrl": "https://www.zensar.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 229,
-      "lastCheckedAt": "2026-11-18T13:30:49.382Z",
+      "responseTimeMs": 575,
+      "lastCheckedAt": "2026-11-19T16:42:27.361Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1488,8 +1488,8 @@
       "careersUrl": "https://www.zoho.com/careers.html",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 242,
-      "lastCheckedAt": "2026-11-18T13:30:49.778Z",
+      "responseTimeMs": 610,
+      "lastCheckedAt": "2026-11-19T16:42:28.080Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1499,8 +1499,8 @@
       "careersUrl": "https://www.zeptonow.com/careers",
       "status": "UP",
       "httpStatusCode": 202,
-      "responseTimeMs": 172,
-      "lastCheckedAt": "2026-11-18T13:30:49.554Z",
+      "responseTimeMs": 394,
+      "lastCheckedAt": "2026-11-19T16:42:27.755Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1510,8 +1510,8 @@
       "careersUrl": "https://careers.wipro.com",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 2408,
-      "lastCheckedAt": "2026-11-18T13:30:49.536Z",
+      "responseTimeMs": 2273,
+      "lastCheckedAt": "2026-11-19T16:42:28.464Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1521,8 +1521,8 @@
       "careersUrl": "https://www.zomato.com/careers",
       "status": "UP",
       "httpStatusCode": 200,
-      "responseTimeMs": 873,
-      "lastCheckedAt": "2026-11-18T13:30:50.427Z",
+      "responseTimeMs": 1424,
+      "lastCheckedAt": "2026-11-19T16:42:29.179Z",
       "errorMessage": null,
       "consecutiveFailures": 0
     },
@@ -1532,10 +1532,10 @@
       "careersUrl": "https://www.servicenow.com/careers.html",
       "status": "DOWN",
       "httpStatusCode": null,
-      "responseTimeMs": 15006,
-      "lastCheckedAt": "2026-11-18T13:31:08.192Z",
+      "responseTimeMs": 15009,
+      "lastCheckedAt": "2026-11-19T16:42:48.355Z",
       "errorMessage": "Failed after retry: timeout of 15000ms exceeded",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     },
     {
       "companyId": 133,
@@ -1543,10 +1543,10 @@
       "careersUrl": "https://careers.vmware.com",
       "status": "DOWN",
       "httpStatusCode": null,
-      "responseTimeMs": 15005,
-      "lastCheckedAt": "2026-11-18T13:31:16.942Z",
+      "responseTimeMs": 15003,
+      "lastCheckedAt": "2026-11-19T16:42:55.267Z",
       "errorMessage": "Failed after retry: timeout of 15000ms exceeded",
-      "consecutiveFailures": 2
+      "consecutiveFailures": 4
     }
   ]
 }
