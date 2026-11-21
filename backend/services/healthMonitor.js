@@ -178,8 +178,8 @@ class HealthMonitor {
   /**
    * Check a single company with 1 retry on failure
    */
-  async checkCompany(company) {
-    const previous = this.results.get(company.id);
+  async checkCompany(company, previousResult = null) {
+    const previous = previousResult || this.results.get(company.id);
     let checkResult = await this.checkPortalUrl(company.careersUrl);
 
     // If initial check resulted in DOWN, retry once after a short delay before declaring down
@@ -221,6 +221,58 @@ class HealthMonitor {
 
     this.results.set(company.id, record);
     return record;
+  }
+
+  /**
+   * Check a batch of companies with controlled concurrency (e.g. for serverless invocations)
+   * @param {Array} companiesList Array of company objects
+   * @param {Map|Function} getExistingResult Map or lookup function (companyId) => { status, consecutiveFailures }
+   * @returns {Promise<Array>} Array of updated records
+   */
+  async checkBatch(companiesList, getExistingResult = null) {
+    const records = [];
+    let index = 0;
+
+    const worker = async () => {
+      while (index < companiesList.length) {
+        const company = companiesList[index++];
+        if (!company || !company.careersUrl) continue;
+
+        try {
+          let prev = null;
+          if (typeof getExistingResult === "function") {
+            prev = getExistingResult(company.id);
+          } else if (getExistingResult instanceof Map) {
+            prev = getExistingResult.get(company.id);
+          }
+
+          const record = await this.checkCompany(company, prev);
+          records.push(record);
+        } catch (err) {
+          console.error(`[HealthMonitor] Error checking batch item ${company.name}:`, err.message);
+          records.push({
+            companyId: company.id,
+            companyName: company.name,
+            careersUrl: company.careersUrl,
+            status: "UNKNOWN",
+            httpStatusCode: null,
+            responseTimeMs: 0,
+            lastCheckedAt: new Date().toISOString(),
+            errorMessage: err.message,
+            consecutiveFailures: 0
+          });
+        }
+      }
+    };
+
+    const workerCount = Math.min(MAX_CONCURRENCY, Math.max(1, companiesList.length));
+    const workers = [];
+    for (let i = 0; i < workerCount; i++) {
+      workers.push(worker());
+    }
+
+    await Promise.all(workers);
+    return records;
   }
 
   /**
@@ -309,7 +361,7 @@ class HealthMonitor {
    * Note: Periodic cron jobs require an active process and will not execute
    * when deployed on serverless platforms that sleep or scale to zero.
    */
-  startScheduler(runInitial = true) {
+  startScheduler(runInitial = false) {
     if (this.cronTask) {
       return;
     }

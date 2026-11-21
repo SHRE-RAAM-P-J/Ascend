@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "dev": "node --env-file=.env server.js",
     "test": "node tests/monitoring.test.js && node tests/server.test.js",
+    "migrate": "node db/migrate.js",
+    "migrate:dry": "node db/migrate.js --dry-run",
     "update": "node services/updateJobs.js"
   },
   "keywords": [],
@@ -18,6 +21,7 @@
     "express": "^5.2.1",
     "express-rate-limit": "^8.7.5",
     "helmet": "^8.3.0",
-    "node-cron": "^4.6.0"
+    "node-cron": "^4.6.0",
+    "pg": "^8.23.1"
   }
 }

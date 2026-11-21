@@ -146,7 +146,33 @@ async function runTests() {
     console.log("  ✔ Production monitoringResults.json remains completely unpolluted");
   }
 
-  // 5. Clean up temporary test file
+  // 5. Batch Processing Method Verification
+  console.log("\n[Test 5] Batch Processing Method (checkBatch):");
+  const testBatch = [
+    { id: 9901, name: "Batch Co 1", careersUrl: "https://example.com/c1" },
+    { id: 9902, name: "Batch Co 2", careersUrl: "https://example.com/c2" }
+  ];
+
+  testMonitor.checkPortalUrl = async (url) => {
+    return {
+      status: url.includes("c1") ? "UP" : "UNKNOWN",
+      httpStatusCode: url.includes("c1") ? 200 : 403,
+      responseTimeMs: 80,
+      errorMessage: null
+    };
+  };
+
+  const existingMap = new Map();
+  // Company 9902 was previously UP, should preserve UP status on UNKNOWN (403 bot block)
+  existingMap.set(9902, { status: "UP", consecutiveFailures: 0 });
+
+  const batchResults = await testMonitor.checkBatch(testBatch, existingMap);
+  assert.strictEqual(batchResults.length, 2, "checkBatch should return 2 records");
+  assert.strictEqual(batchResults.find((r) => r.companyId === 9901).status, "UP");
+  assert.strictEqual(batchResults.find((r) => r.companyId === 9902).status, "UP", "Previous UP status should be preserved on 403 UNKNOWN");
+  console.log("  ✔ checkBatch processes slices and preserves status continuity");
+
+  // 6. Clean up temporary test file
   if (fs.existsSync(TEST_RESULTS_FILE)) {
     fs.unlinkSync(TEST_RESULTS_FILE);
   }

@@ -5,6 +5,18 @@ const rateLimit = require("express-rate-limit");
 const path = require("path");
 const fs = require("fs");
 
+// Secure local .env loading in Node 24+ without external dependencies
+if (!process.env.DATABASE_URL) {
+  const envPath = path.join(__dirname, ".env");
+  if (fs.existsSync(envPath) && typeof process.loadEnvFile === "function") {
+    try {
+      process.loadEnvFile(envPath);
+    } catch (e) {
+      console.warn("[Server] Could not auto-load .env:", e.message);
+    }
+  }
+}
+
 const fetchZohoJobs = require("./services/fetchZohoJobs");
 const fetchMicrosoftJobs = require("./services/fetchMicrosoftJobs");
 const monitoringRoutes = require("./routes/monitoring");
@@ -90,23 +102,23 @@ app.use((req, res, next) => {
   next();
 });
 
-// 5. Static frontend serving
+// 5. Static frontend serving (Only when running standalone Node server, not on Vercel)
 const frontendDistPath = path.join(__dirname, "../frontend/dist");
 const frontendIndexPath = path.join(frontendDistPath, "index.html");
 
-if (fs.existsSync(frontendDistPath)) {
+if (process.env.VERCEL !== "1" && fs.existsSync(frontendDistPath)) {
   app.use(express.static(frontendDistPath));
+
+  // 6. React SPA fallback (Express 5 compatible middleware without outdated wildcard strings)
+  app.use((req, res, next) => {
+    if (req.method === "GET" && fs.existsSync(frontendIndexPath)) {
+      return res.sendFile(frontendIndexPath);
+    }
+    next();
+  });
 }
 
-// 6. React SPA fallback (Express 5 compatible middleware without outdated wildcard strings)
-app.use((req, res, next) => {
-  if (req.method === "GET" && fs.existsSync(frontendIndexPath)) {
-    return res.sendFile(frontendIndexPath);
-  }
-  next();
-});
-
-// 7. Generic 404 handler if frontend build is missing or for unhandled routes
+// 7. Generic 404 handler if route is unhandled
 app.use((req, res) => {
   res.status(404).json({ error: "Not Found" });
 });
@@ -123,11 +135,13 @@ app.use((err, req, res, _next) => { // eslint-disable-line no-unused-vars
 const PORT = process.env.PORT || 5000;
 
 let server = null;
-if (process.env.NODE_ENV !== "test") {
+if (process.env.NODE_ENV !== "test" && process.env.VERCEL !== "1") {
   server = app.listen(PORT, () => {
     console.log(`Ascend Server running on port ${PORT} [${process.env.NODE_ENV || "development"}]`);
-    // Start the automated 60-minute health monitoring service
-    healthMonitor.startScheduler(true);
+    // Cron scheduling is disabled by default to support on-demand manual refresh architecture
+    if (process.env.ENABLE_CRON === "true") {
+      healthMonitor.startScheduler(false);
+    }
   });
 }
 
