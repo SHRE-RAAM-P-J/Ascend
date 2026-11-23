@@ -10,7 +10,7 @@ export const companies = [
     "id": 2,
     "name": "Adidas",
     "domain": "adidas.com",
-    "careersUrl": "https://careers.adidas.com",
+    "careersUrl": "https://careers.adidas-group.com/",
     "enabled": true
   },
   {
@@ -80,7 +80,7 @@ export const companies = [
     "id": 12,
     "name": "ASUS",
     "domain": "asus.com",
-    "careersUrl": "https://www.asus.com/careers/",
+    "careersUrl": "https://careers.asus.com/",
     "enabled": true
   },
   {
@@ -136,7 +136,7 @@ export const companies = [
     "id": 20,
     "name": "BNY",
     "domain": "bny.com",
-    "careersUrl": "https://www.bny.com/en/careers.html",
+    "careersUrl": "https://www.bny.com/corporate/global/en/about-us/careers/work-with-us.html",
     "enabled": true
   },
   {
