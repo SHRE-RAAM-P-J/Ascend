@@ -44,7 +44,7 @@
     {
       "companyId": 2,
       "companyName": "Adidas",
-      "careersUrl": "https://careers.adidas.com",
+      "careersUrl": "https://careers.adidas-group.com/",
       "status": "DOWN",
       "httpStatusCode": null,
       "responseTimeMs": 90,
