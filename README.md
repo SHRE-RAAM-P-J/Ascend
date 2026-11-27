@@ -2,12 +2,14 @@
 
 [![React](https://img.shields.io/badge/React-19-61dafb.svg?style=flat-square&logo=react)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8.3-646cff.svg?style=flat-square&logo=vite)](https://vitejs.dev/)
-[![Node.js](https://img.shields.io/badge/Node.js-18+-339933.svg?style=flat-square&logo=nodedotjs)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-24+-339933.svg?style=flat-square&logo=nodedotjs)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-5.2-000000.svg?style=flat-square&logo=express)](https://expressjs.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-3ecf8e.svg?style=flat-square&logo=supabase)](https://supabase.com/)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000.svg?style=flat-square&logo=vercel)](https://vercel.com/)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Active%20Development-success.svg?style=flat-square)](#current-project-status)
+[![Status](https://img.shields.io/badge/Status-Production%20Ready-success.svg?style=flat-square)](#current-project-status)
 
-> **Ascend** is a centralized, high-performance career-portal directory connecting candidates directly to the official, verified career pages of 140 leading global technology organizations — accompanied by an automated, scheduled health monitoring engine that tracks portal availability in real time.
+> **Ascend** is a centralized, high-performance career-portal directory connecting candidates directly to the official, verified career pages of 140 leading global technology organizations — accompanied by an on-demand batch monitoring and automated health check engine that tracks portal availability in real time.
 
 ---
 
@@ -27,8 +29,14 @@
   - [Prerequisites](#prerequisites)
   - [Backend Setup](#backend-setup)
   - [Frontend Setup](#frontend-setup)
-- [Environment Variables](#environment-variables)
-- [Automated Health Monitoring](#automated-health-monitoring)
+  - [Database Migration & Verification](#database-migration--verification)
+- [Deployment on Vercel](#deployment-on-vercel)
+  - [Environment Variables](#environment-variables)
+  - [Vercel Deployment Steps](#vercel-deployment-steps)
+- [Automated & On-Demand Health Monitoring](#automated--on-demand-health-monitoring)
+  - [Status Classification Rules](#status-classification-rules)
+  - [Monitoring REST Endpoints](#monitoring-rest-endpoints)
+  - [Hourly Scheduled Monitoring (3 Strategies)](#hourly-scheduled-monitoring-3-strategies)
 - [Current Project Status](#current-project-status)
 - [Future Development Roadmap](#future-development-roadmap)
 - [Author & Acknowledgements](#author--acknowledgements)
@@ -40,8 +48,8 @@
 Finding legitimate career opportunities across premier global technology firms often involves navigating through third-party job boards, outdated aggregators, and spam listings. **Ascend** solves this by providing:
 
 1. **Direct Access:** One-click navigation (`target="_blank"` with `rel="noopener noreferrer"`) directly to official company career systems (Workday, Greenhouse, Lever, Taleo, and custom enterprise portals).
-2. **Visual Directory:** An obsidian-dark, browser-window container featuring authentic company brand assets and responsive grid cards.
-3. **Automated Health Monitoring:** An autonomous background scheduler that verifies every careers portal every 60 minutes, recording uptime, latency, and status (`UP`, `DOWN`, or `UNKNOWN`).
+2. **Visual Directory:** An obsidian-dark, browser-window container featuring authentic company brand assets, live search filtering, and responsive grid cards.
+3. **On-Demand & Automated Health Monitoring:** Tracks portal availability (`UP`, `DOWN`, or `UNKNOWN`) using database-backed batch leases that respect serverless timeouts and support manual one-click refresh with real-time progress.
 
 ---
 
@@ -56,11 +64,12 @@ Finding legitimate career opportunities across premier global technology firms o
 ## Key Features
 
 - **140 Verified Companies:** Curated master dataset encompassing global enterprises, fast-growing tech companies, and multinational corporations.
-- **Modern Browser-Window Container:** Sleek top-bar with macOS-inspired window controls, simulated secure address bar (`ascend.directory/companies`), and active status pill.
-- **Responsive 5-Column Grid:** Adaptive layout transitioning seamlessly from 5 columns on desktop to 4, 3, and 1–2 columns on tablet and mobile devices.
-- **Intelligent Brand Logo Engine:** Fetches 128px high-resolution official brand favicons with zero external layout shifts and automatically falls back to an elegant 2-letter gradient badge.
-- **Automated Hourly Health Checks:** Built-in `node-cron` service automatically pings all registered URLs every 60 minutes with 15-second timeouts and controlled concurrency.
-- **Real-Time Status Badges:** Dynamic `↑ UP` (green), `↓ DOWN` (red), and `● UNKNOWN` (neutral) badges accompanied by auto-refreshing human-readable relative timestamps (*"Checked just now"*, *"Checked 40 minutes ago"*).
+- **Modern Browser-Window Container:** Sleek top-bar with window controls, simulated address bar (`ascend.directory/companies`), live search bar, and status pill.
+- **Responsive Grid:** Adaptive layout transitioning seamlessly from 5 columns on desktop to 4, 3, and 1–2 columns on tablet and mobile devices.
+- **Intelligent Brand Logo Engine:** Fetches 128px high-resolution official brand favicons with zero layout shifts and automatically falls back to an elegant 2-letter gradient badge.
+- **On-Demand Batch Refresh:** Visitors can click **"Refresh Statuses"** to execute a controlled, serverless-compatible batch health check (10 portals per batch) with live progress tracking.
+- **Resilient Database Storage:** Backed by PostgreSQL (Supabase transaction pooler on port 6543) with automatic fallback to local persistent JSON for local development.
+- **Real-Time Status Badges:** Dynamic `UP` (green dot), `DOWN` (red dot), and `UNKNOWN` (neutral dot) badges with auto-refreshing human-readable relative timestamps (*"Checked just now"*, *"Checked 40 minutes ago"*).
 - **Intelligent Outage Classification:** Distinguishes temporary bot protections (HTTP 403 / 429) from actual outages (5xx, DNS failures, connection timeouts) with single-retry verification before marking a portal as down.
 - **Preserved Job Aggregators:** Microsoft Careers and Zoho Recruit collectors remain fully functional in the backend for upcoming aggregation phases.
 
@@ -75,12 +84,12 @@ Finding legitimate career opportunities across premier global technology firms o
 - **Styling:** CSS Grid, Flexbox, Custom Properties, Glassmorphism (zero heavy CSS framework bloat)
 
 ### Backend
-- **Runtime:** Node.js (v18+ recommended)
+- **Runtime:** Node.js 24+
 - **Framework:** Express 5.2
-- **Security:** Helmet, express-rate-limit, SSRF URL Validator, strict CORS, request body limits (10kb)
-- **Scheduling:** node-cron 4.6 (requires persistent process; see hosting notes)
+- **Database:** PostgreSQL (Supabase transaction pooling on port 6543) via `pg` pool
+- **Security:** Helmet, express-rate-limit, SSRF URL Validator, reverse-proxy trust (`trust proxy 1`), strict CORS, request body limits (10kb)
 - **HTTP Client:** Axios (with timeout, redirect, and retry control)
-- **Data Store:** Atomic persistent JSON storage (`backend/data/monitoringResults.json`)
+- **Deployment:** Vercel (unified static frontend + serverless backend via `vercel.json`)
 
 ---
 
@@ -91,33 +100,34 @@ Finding legitimate career opportunities across premier global technology firms o
                   |                    ASCEND FRONTEND                 |
                   |  - Browser Window Container                        |
                   |  - Responsive CSS Grid (5-col Desktop)             |
-                  |  - High-Res Brand Favicon Cache                    |
+                  |  - Live Search Filter                              |
+                  |  - On-Demand "Refresh Statuses" Orchestrator       |
                   |  - Relative Timestamp Refresh Engine (every 30s)   |
                   +-------------------------+--------------------------+
                                             |
-                         GET /api/monitoring/status (every 60s)
-                                            v
-                  +----------------------------------------------------+
-                  |                    EXPRESS BACKEND                 |
-                  |  Port: 5000 (CORS Enabled)                         |
-                  |  Endpoints:                                        |
-                  |    - GET /api/monitoring/status                    |
-                  |    - GET /jobs (Microsoft & Zoho Aggregator)       |
-                  +-------------------------+--------------------------+
-                                            |
-                                            v
-                  +----------------------------------------------------+
-                  |             HEALTH MONITORING SERVICE              |
-                  |  - node-cron (Executes every 60 minutes)           |
-                  |  - Concurrency Limiter (5 simultaneous checks)     |
-                  |  - 15s Timeout + Follow Redirects                  |
-                  |  - 1x Auto-Retry on Transient Failures             |
-                  |  - Bot Challenge Classification (403/429 -> UNKNOWN|
-                  |  - Persistent Store: monitoringResults.json        |
-                  +-------------------------+--------------------------+
-                                            |
-                                            v
-                               [ 140 Official Career Portals ]
+         +----------------------------------+----------------------------------+
+         | GET /api/monitoring/status                                          | POST /api/monitoring/refresh
+         v (Read-only stored results)                                          v (Initiates batch job)
++---------------------------------------------------------------------------------------------------+
+|                                       EXPRESS 5 BACKEND                                            |
+|  Endpoints:                                                                                       |
+|    - GET  /api/monitoring/status          (Fetch latest saved portal statuses)                     |
+|    - POST /api/monitoring/refresh         (Create/retrieve active monitoring job)                 |
+|    - POST /api/monitoring/refresh/:id/next (Process 10-company batch with lease lock)              |
+|    - GET  /api/monitoring/refresh/:id     (Job progress & state inquiry)                          |
+|    - POST /api/monitoring/refresh/:id/cancel (Cancel active job)                                  |
+|    - GET  /api/monitoring/cron           (Scheduled runner with CRON_SECRET auth)                 |
+|    - GET  /jobs                          (Microsoft & Zoho Aggregator)                           |
++-------------------------------------------------+-------------------------------------------------+
+                                                  |
+                                                  v
++---------------------------------------------------------------------------------------------------+
+|                                   DATABASE & STORAGE LAYER                                        |
+|  - PostgreSQL (Supabase via port 6543 transaction pooler)                                         |
+|    ├── monitoring_results (140 portal uptime records, status, latencies, failure counters)       |
+|    └── monitoring_jobs    (On-demand jobs, leases, batch offsets, concurrency lock)               |
+|  - Local Fallback: backend/data/monitoringResults.json                                            |
++---------------------------------------------------------------------------------------------------+
 ```
 
 ---
@@ -126,48 +136,59 @@ Finding legitimate career opportunities across premier global technology firms o
 
 ```text
 Ascend/
-├── README.md                      # Project documentation
+├── README.md                      # Comprehensive project documentation
+├── vercel.json                    # Unified Vercel serverless + static routing configuration
+├── .github/
+│   └── workflows/
+│       └── hourly-monitoring.yml  # Optional GitHub Actions hourly cron workflow
 ├── docs/
 │   └── screenshots/               # Application captures and design references
 │       ├── directory-browser-preview.png
 │       ├── ui-design-reference.jpg
 │       └── hand-drawn-wireframe.png
 ├── backend/
-│   ├── package.json               # Backend dependencies & test scripts
-│   ├── server.js                  # Main Express entry point & scheduler boot
+│   ├── package.json               # Backend dependencies, scripts & tests
+│   ├── server.js                  # Main Express entry point, security middleware & routing
+│   ├── .env.example               # Environment variable template
+│   ├── db/
+│   │   ├── client.js              # PostgreSQL client connection pool
+│   │   ├── schema.sql             # Database schema (monitoring_results & monitoring_jobs)
+│   │   ├── monitoringStore.js     # Storage abstraction (status, jobs, leases, fail-safe)
+│   │   └── migrate.js             # Idempotent migration script (supports --dry-run)
 │   ├── cache/                     # Cached job aggregator data
 │   │   ├── jobs.json
 │   │   ├── microsoft.json
 │   │   └── zoho.json
-│   ├── data/                      # Persistent storage for monitoring
+│   ├── data/                      # Baseline seed data
 │   │   ├── companies.json         # Master registered companies dataset (141 entries)
-│   │   └── monitoringResults.json # Persisted health check results & summary
+│   │   └── monitoringResults.json # Seed health check results (140 entries)
 │   ├── routes/
-│   │   └── monitoring.js          # GET /api/monitoring/status route
+│   │   └── monitoring.js          # REST endpoints for status, refresh, and cron
 │   ├── services/
-│   │   ├── healthMonitor.js       # Core monitoring engine & status classifier
+│   │   ├── healthMonitor.js       # Core monitoring engine, checkBatch, and retry logic
 │   │   ├── fetchMicrosoftJobs.js  # Microsoft Careers collector
 │   │   ├── fetchZohoJobs.js       # Zoho Recruit collector
 │   │   └── updateJobs.js          # Aggregator cache updater
 │   ├── utils/
 │   │   └── ssrfValidator.js       # SSRF protection and IP/protocol validator
 │   └── tests/
-│       └── monitoring.test.js     # Health monitor test suite (100% pass)
+│       ├── monitoring.test.js     # Unit test suite for status classification & checkBatch
+│       └── server.test.js         # Integration test suite for Express routes, CORS & cron
 └── frontend/
     ├── package.json               # Frontend dependencies & Vite scripts
-    ├── vite.config.js             # Vite configuration
+    ├── vite.config.js             # Vite configuration with /api proxy
     ├── index.html                 # Main HTML document
     └── src/
         ├── App.jsx                # Main layout composition
         ├── main.jsx               # React DOM entry point
         ├── index.css              # Obsidian global theme & canvas
         ├── data/
-        │   └── companyData.js     # Frontend static company definitions (141 entries)
+        │   └── companyData.js     # Frontend company definitions (141 entries)
         ├── utils/
         │   └── timeAgo.js         # Human-readable relative time formatter
         ├── components/
         │   ├── Navbar.jsx         # Ascend typography & header
-        │   ├── CompanyDirectory.jsx # Browser container & grid coordinator
+        │   ├── CompanyDirectory.jsx # Browser container, search & refresh orchestrator
         │   └── CompanyCard.jsx    # Individual company tile with logo & status
         └── styles/
             ├── App.css
@@ -181,14 +202,14 @@ Ascend/
 ## Getting Started
 
 ### Prerequisites
-- **Node.js** v18.0.0 or higher
-- **npm** v9.0.0 or higher
+- **Node.js** v24.0.0 or higher
+- **npm** v10.0.0 or higher
 
 ---
 
 ### Backend Setup
 
-1. Open your terminal and navigate to the `backend` directory:
+1. Navigate to the `backend` directory:
    ```bash
    cd backend
    ```
@@ -198,16 +219,17 @@ Ascend/
    npm install
    ```
 
-3. Run the automated test suite to verify monitoring health logic:
+3. Run the automated test suites:
    ```bash
    npm test
    ```
+   *Runs both `monitoring.test.js` and `server.test.js` in complete test isolation (100% pass).*
 
-4. Start the Express server and scheduler:
+4. Start the development server:
    ```bash
-   npm start
+   npm run dev
    ```
-   *The server starts on `http://localhost:5000` and immediately executes an initial background health check.*
+   *Starts on `http://localhost:5000` loading `.env` automatically via Node 24 native `--env-file`.*
 
 ---
 
@@ -223,34 +245,70 @@ Ascend/
    npm install
    ```
 
-3. Launch the development server:
+3. Run linter and verify production build:
    ```bash
-   npm run dev
-   ```
-   *Vite will start the client, accessible by default at `http://localhost:5173`.*
-
-4. To generate a production build:
-   ```bash
+   npm run lint
    npm run build
    ```
 
----
-
-## Environment Variables
-
-| Variable | Location | Default | Description |
-|:---|:---|:---|:---|
-| `PORT` | `backend` | `5000` | Port for the Express REST server |
-| `NODE_ENV` | `backend` | `development` | Environment mode (`development` / `production`) |
-| `CORS_ORIGIN` | `backend` | `http://localhost:5173,http://localhost:5000` | Comma-separated allowed CORS origins |
-| `VITE_API_URL` | `frontend` | *(Empty string / same-origin)* | Base URL for API requests in production or custom CDN |
-
-> **Important Deployment Note on Scheduled Monitoring:**
-> The automated 60-minute health monitor utilizes `node-cron` inside the Express process. It requires a persistent runtime (such as Render Web Service, Railway, Fly.io, AWS ECS, or a VPS). Serverless platforms that scale down to zero (e.g. Vercel Serverless Functions, AWS Lambda) sleep between HTTP requests and cannot execute background cron intervals without external webhook pingers.
+4. Launch the development server:
+   ```bash
+   npm run dev
+   ```
+   *Vite starts on `http://localhost:5173` with automatic API proxy to `http://localhost:5000`.*
 
 ---
 
-## Automated Health Monitoring
+### Database Migration & Verification
+
+Ascend includes an idempotent migration script that creates the necessary tables, indexes, and imports all 140 baseline monitoring results:
+
+- **Dry-run simulation (offline, safe to run anytime):**
+  ```bash
+  npm run migrate:dry --prefix backend
+  ```
+- **Live migration (requires `DATABASE_URL` in `backend/.env`):**
+  ```bash
+  npm run migrate --prefix backend
+  ```
+
+---
+
+## Deployment on Vercel
+
+Ascend is configured for unified same-domain deployment on Vercel via [vercel.json](vercel.json).
+
+### Environment Variables
+
+Configure these environment variables in your **Vercel Project Settings → Environment Variables**:
+
+| Variable | Required | Description | Example / Note |
+|:---|:---:|:---|:---|
+| `DATABASE_URL` | **Yes** | Supabase pooled connection string | `postgresql://postgres.[ref]:[password]@aws-1-[region].pooler.supabase.com:6543/postgres` |
+| `CRON_SECRET` | Recommended | Secret token protecting the scheduled `/api/monitoring/cron` endpoint | Any random 32+ character string |
+| `CORS_ORIGIN` | Optional | Custom production domain(s) if not using default `.vercel.app` | `https://ascend.directory` |
+| `NODE_ENV` | Optional | Set to `production` in production environment | `production` |
+
+> 🔒 **Security Notice:** `DATABASE_URL` is used strictly on the serverless backend. It is never exposed to client-side code.
+
+---
+
+### Vercel Deployment Steps
+
+1. **Push your repository** to GitHub.
+2. In the [Vercel Dashboard](https://vercel.com/dashboard), click **"Add New Project"** and import the repository.
+3. Keep default build settings (Vercel automatically detects [vercel.json](vercel.json)).
+4. Add the **Environment Variables** (`DATABASE_URL`, `CRON_SECRET`).
+5. Click **"Deploy"**.
+6. Run the initial database migration against your Supabase instance:
+   ```bash
+   npm run migrate --prefix backend
+   ```
+7. Open your deployed Ascend URL!
+
+---
+
+## Automated & On-Demand Health Monitoring
 
 ### Status Classification Rules
 
@@ -262,68 +320,64 @@ Ascend/
 | **HTTP 404 / 410** | `DOWN` | Dead or decommissioned careers URL |
 | **DNS (ENOTFOUND, EAI_AGAIN)** | `DOWN` | Domain resolution failure |
 | **Timeout (ETIMEDOUT, 15s)** | `DOWN` | Connection timeout (confirmed after 1x retry) |
-| **HTTP 403 / 429** | `UNKNOWN` | WAF / Cloudflare bot protection challenge (not an outage) |
+| **HTTP 403 / 429** | `UNKNOWN` | Bot challenge / Cloudflare protection (not an outage; preserves prior UP state) |
 | **HTTP 401** | `UNKNOWN` | Restricted corporate career portal |
 
-### API Endpoint: `GET /api/monitoring/status`
+---
 
-**Sample Response:**
-```json
-{
-  "summary": {
-    "totalMonitored": 140,
-    "up": 137,
-    "down": 0,
-    "unknown": 3,
-    "lastRunAt": "2026-11-17T21:15:00.000Z",
-    "isRunning": false
-  },
-  "results": [
-    {
-      "companyId": 1,
-      "companyName": "Accenture",
-      "careersUrl": "https://www.accenture.com/careers",
-      "status": "UP",
-      "httpStatusCode": 200,
-      "responseTimeMs": 412,
-      "lastCheckedAt": "2026-11-17T21:15:02.124Z",
-      "errorMessage": null,
-      "consecutiveFailures": 0
-    }
-  ]
-}
-```
+### Monitoring REST Endpoints
+
+- `GET /api/monitoring/status`: Read-only. Returns current saved health statuses and aggregate summary. Never executes health checks on read.
+- `POST /api/monitoring/refresh`: Starts or retrieves an on-demand refresh job (rate-limited to 2 requests per minute per IP).
+- `POST /api/monitoring/refresh/:jobId/next`: Serverless-friendly batch check (processes 10 companies per call with lease concurrency lock).
+- `GET /api/monitoring/refresh/:jobId`: Returns current job progress percentage and state.
+- `POST /api/monitoring/refresh/:jobId/cancel`: Cancels an active job.
+- `GET /api/monitoring/cron`: Scheduled hourly endpoint. Requires `Authorization: Bearer <CRON_SECRET>` or `?key=<CRON_SECRET>`.
+
+---
+
+### Hourly Scheduled Monitoring (3 Strategies)
+
+1. **Vercel Cron Jobs (Built-in via `vercel.json`):**
+   - Configured in [vercel.json](vercel.json) to trigger `/api/monitoring/cron`.
+   - On Vercel Pro plans, executes hourly (`0 * * * *`). On Vercel Hobby plans, runs once daily.
+2. **GitHub Actions Hourly Workflow (Free for Hobby users):**
+   - Included at [.github/workflows/hourly-monitoring.yml](.github/workflows/hourly-monitoring.yml).
+   - Set repository secrets `ASCEND_APP_URL` and `CRON_SECRET` to automatically trigger `/api/monitoring/cron` at minute 0 of every hour for free.
+3. **Persistent Server Hosts (Docker, Render, VPS):**
+   - Set `ENABLE_CRON=true` to utilize the built-in `node-cron` scheduler inside `healthMonitor.js`.
 
 ---
 
 ## Current Project Status
 
-- [x] **Phase 1: Company Directory Redesign**
-  - [x] Hand-drawn wireframe transformed into sleek browser container.
-  - [x] All 140 active companies integrated without duplicates.
-  - [x] Responsive 5-column desktop CSS Grid with mobile adaptivity.
+- [x] **Frontend Redesign & Directory UI**
+  - [x] All 140 active companies displayed in responsive CSS Grid.
+  - [x] Real-time client search filtering with live count.
   - [x] High-res official brand logos with dynamic 2-letter fallback badges.
-  - [x] KPIT Technologies temporarily excluded and flagged for URL update.
-  - [x] Removed obsolete job search and yellow separator line.
-- [x] **Phase 2: Health Monitoring Engine**
-  - [x] Automated 60-minute scheduler using `node-cron`.
+  - [x] On-demand "Refresh Statuses" button with animated spinner and progress bar.
+- [x] **Backend & Health Monitoring Engine**
+  - [x] Controlled batch checking (10 companies per invocation) preventing serverless timeouts.
   - [x] 15-second timeout, redirect handling, and automatic failure retry.
-  - [x] Persistent JSON storage across server restarts.
-  - [x] `GET /api/monitoring/status` read-only summary API.
-  - [x] Dynamic frontend card status indicators (`↑ UP`, `↓ DOWN`, `● UNKNOWN`).
-  - [x] Real-time client-side relative timestamps (*"Checked just now"*).
-  - [x] 100% test coverage on monitoring classification and retry logic.
+  - [x] Bot protection preservation (HTTP 403/429 never marks known UP portals as false DOWN).
+  - [x] SSRF URL validation blocking localhost, private subnets, and cloud metadata IPs.
+  - [x] Reverse-proxy trust configuration (`trust proxy 1`) for accurate rate limiting.
+- [x] **Database & Serverless Deployment Readiness**
+  - [x] PostgreSQL schema with `monitoring_results` and `monitoring_jobs`.
+  - [x] Partial unique index preventing duplicate concurrent monitoring jobs.
+  - [x] Automatic 30-minute stale job cleanup and lease recovery.
+  - [x] Idempotent data migration script with verified `--dry-run` simulation.
+  - [x] Unified Vercel configuration (`vercel.json`) with 60-second function duration budget.
+  - [x] 100% passing unit and integration test suite (15/15 tests).
 
 ---
 
 ## Future Development Roadmap
 
-- [ ] **Database Migration:** Transition from JSON persistence to PostgreSQL with Prisma ORM.
-- [ ] **Search & Industry Taxonomy:** Real-time client search and category filters (Fintech, AI/ML, Cloud, Semiconductor, Enterprise SaaS).
-- [ ] **Playwright Browser Testing:** Automated browser testing to verify JavaScript-heavy applicant tracking systems.
+- [ ] **Industry Taxonomy & Filtering:** Filter companies by industry sector (Semiconductor, Enterprise SaaS, AI/ML, Fintech, Cloud Infrastructure).
 - [ ] **Uptime Analytics & SLA:** Historical uptime charts and average response latency graphs per company.
-- [ ] **Automated Career URL Verification:** Web hook alerts notifying administrators when career links break.
-- [ ] **AI-Assisted Job Discovery:** Semantic job matching connecting candidate profiles with live job openings from monitored portals.
+- [ ] **Web Hook Outage Alerts:** Slack/Discord webhook alerts when monitored career portals experience outages.
+- [ ] **Job Aggregation UI:** Display live job listings collected from Microsoft Careers and Zoho Recruit integrations.
 
 ---
 
@@ -331,7 +385,6 @@ Ascend/
 
 - **Author:** Developed for the **Ascend** platform.
 - **Brand Assets:** Favicon resolution powered by Google's global CDN service.
-- **Inspiration:** Hand-drawn wireframe and modern developer tool directories (AgentRunner, Stripe, Raycast).
 
 ---
 

@@ -5,8 +5,8 @@ const rateLimit = require("express-rate-limit");
 const path = require("path");
 const fs = require("fs");
 
-// Secure local .env loading in Node 24+ without external dependencies
-if (!process.env.DATABASE_URL) {
+// Secure local .env loading in Node 24+ without external dependencies (skip during tests)
+if (!process.env.DATABASE_URL && process.env.NODE_ENV !== "test") {
   const envPath = path.join(__dirname, ".env");
   if (fs.existsSync(envPath) && typeof process.loadEnvFile === "function") {
     try {
@@ -24,7 +24,14 @@ const healthMonitor = require("./services/healthMonitor");
 
 const app = express();
 
+// Enable reverse proxy support (essential for Vercel / Cloudflare rate limiting by real client IP)
+app.set("trust proxy", 1);
+
 // 1. Security middleware: Helmet with Content Security Policy
+const customCorsOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",").map((o) => o.trim())
+  : [];
+
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -33,7 +40,13 @@ app.use(
         scriptSrc: ["'self'", "'unsafe-inline'"],
         styleSrc: ["'self'", "'unsafe-inline'"],
         imgSrc: ["'self'", "data:", "https://t3.gstatic.com"],
-        connectSrc: ["'self'", "http://localhost:5000", "http://localhost:5173"]
+        connectSrc: [
+          "'self'",
+          "http://localhost:5000",
+          "http://localhost:5173",
+          "https://*.vercel.app",
+          ...customCorsOrigins
+        ]
       }
     },
     crossOriginEmbedderPolicy: false
@@ -41,21 +54,47 @@ app.use(
 );
 
 // 2. CORS and request configuration
-const allowedOrigins = process.env.CORS_ORIGIN
-  ? process.env.CORS_ORIGIN.split(",").map((o) => o.trim())
-  : ["http://localhost:5173", "http://localhost:3000", "http://localhost:5000"];
+const isAllowedOrigin = (origin) => {
+  // Allow requests with no origin (mobile apps, curl, server-to-server, or same-origin)
+  if (!origin) return true;
+  if (process.env.NODE_ENV !== "production") return true;
+
+  // Local development origins
+  if (
+    origin === "http://localhost:5173" ||
+    origin === "http://localhost:3000" ||
+    origin === "http://localhost:5000"
+  ) {
+    return true;
+  }
+
+  // Explicitly configured production origins
+  if (customCorsOrigins.includes(origin)) return true;
+
+  // Vercel deployment URL (auto-populated by Vercel environment)
+  if (process.env.VERCEL_URL && origin === `https://${process.env.VERCEL_URL}`) {
+    return true;
+  }
+
+  // Allow standard Vercel preview and production deployment subdomains
+  if (/^https:\/\/[a-z0-9-]+(?:\.[a-z0-9-]+)*\.vercel\.app$/i.test(origin)) {
+    return true;
+  }
+
+  return false;
+};
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, or same-origin)
-      if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== "production") {
+      if (isAllowedOrigin(origin)) {
         callback(null, true);
       } else {
-        callback(new Error("CORS policy violation: Origin not allowed"));
+        // Return false without crashing Express with an unhandled exception
+        callback(null, false);
       }
     },
-    methods: ["GET", "HEAD", "OPTIONS"],
+    methods: ["GET", "HEAD", "POST", "OPTIONS"],
     credentials: true
   })
 );

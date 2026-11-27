@@ -183,9 +183,113 @@ router.post("/refresh/:jobId/next", async (req, res) => {
     });
   } catch (error) {
     console.error("[MonitoringRoute] Batch processing error:", error.message);
+    // Immediately release the lease and log error so subsequent attempts can recover
+    await monitoringStore.recordBatchFailure(jobId, error.message).catch(() => {});
     res.status(500).json({ error: "Failed to process monitoring batch", details: error.message });
   }
 });
+
+/**
+ * GET /api/monitoring/cron and POST /api/monitoring/cron
+ * Scheduled hourly cron endpoint compatible with Vercel Cron Jobs and external webhooks.
+ * Protected by CRON_SECRET environment variable when set.
+ * Iterates through batches within a safe execution time budget (~45 seconds).
+ */
+const handleCronTrigger = async (req, res) => {
+  // 1. Authorization check
+  const cronSecret = process.env.CRON_SECRET;
+  if (cronSecret) {
+    const authHeader = req.headers.authorization;
+    const bearerToken = authHeader && authHeader.startsWith("Bearer ")
+      ? authHeader.slice(7).trim()
+      : null;
+    const queryKey = req.query.key;
+
+    if (bearerToken !== cronSecret && queryKey !== cronSecret) {
+      return res.status(401).json({ error: "Unauthorized: Invalid CRON_SECRET" });
+    }
+  }
+
+  try {
+    // 2. Retrieve or create active job
+    let job = await monitoringStore.getActiveJob();
+    if (!job) {
+      const enabledCompanies = healthMonitor.getEnabledCompanies();
+      if (!enabledCompanies || enabledCompanies.length === 0) {
+        return res.status(400).json({ error: "No enabled companies found to monitor" });
+      }
+      job = await monitoringStore.createJob(enabledCompanies);
+    }
+
+    const startTime = Date.now();
+    const MAX_DURATION_MS = 45000; // 45-second budget to prevent gateway timeouts
+    let batchesProcessed = 0;
+    let isCompleted = false;
+
+    // 3. Process batches until completed or time budget reached
+    while (Date.now() - startTime < MAX_DURATION_MS) {
+      const leasedJob = await monitoringStore.acquireBatchLease(job.id, 25000);
+      if (!leasedJob) {
+        // Lease currently held by another worker; break to prevent conflict
+        break;
+      }
+
+      let snapshot = leasedJob.companySnapshot;
+      if (typeof snapshot === "string") {
+        snapshot = JSON.parse(snapshot);
+      }
+
+      const offset = leasedJob.nextOffset || 0;
+      const batch = snapshot.slice(offset, offset + BATCH_SIZE);
+
+      if (batch.length === 0) {
+        await monitoringStore.updateJobProgress(job.id, {
+          processedCompanies: leasedJob.totalCompanies,
+          nextOffset: leasedJob.totalCompanies,
+          status: "completed",
+          completedAt: new Date().toISOString()
+        });
+        isCompleted = true;
+        break;
+      }
+
+      const existingResultMap = await monitoringStore.getExistingResultMap();
+      const batchResults = await healthMonitor.checkBatch(batch, existingResultMap);
+      await monitoringStore.upsertResultsBatch(batchResults);
+
+      const newProcessed = leasedJob.processedCompanies + batch.length;
+      const newOffset = offset + batch.length;
+      isCompleted = newOffset >= leasedJob.totalCompanies;
+
+      await monitoringStore.updateJobProgress(job.id, {
+        processedCompanies: newProcessed,
+        nextOffset: newOffset,
+        status: isCompleted ? "completed" : "pending",
+        completedAt: isCompleted ? new Date().toISOString() : null
+      });
+
+      batchesProcessed++;
+      if (isCompleted) break;
+    }
+
+    res.json({
+      success: true,
+      jobId: job.id,
+      completed: isCompleted,
+      batchesProcessed,
+      elapsedMs: Date.now() - startTime,
+      message: isCompleted
+        ? "Scheduled health check completed successfully"
+        : "Batches processed within time budget; remaining batches will continue on next schedule"
+    });
+  } catch (error) {
+    console.error("[MonitoringRoute] Cron trigger error:", error.message);
+    res.status(500).json({ error: "Failed to execute scheduled health check", details: error.message });
+  }
+};
+
+router.get("/cron", handleCronTrigger);
+router.post("/cron", handleCronTrigger);
 
 /**
  * GET /api/monitoring/refresh/:jobId

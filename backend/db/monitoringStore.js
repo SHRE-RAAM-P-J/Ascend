@@ -14,7 +14,7 @@ const fs = require("fs");
 const path = require("path");
 
 const DATA_DIR = path.join(__dirname, "../data");
-const JSON_RESULTS_FILE = path.join(DATA_DIR, "monitoringResults.json");
+const JSON_RESULTS_FILE = process.env.RESULTS_FILE || path.join(DATA_DIR, "monitoringResults.json");
 
 function isDbConfigured() {
   return Boolean(process.env.DATABASE_URL);
@@ -237,11 +237,25 @@ async function getExistingResultMap() {
 }
 
 /**
- * Find active pending or running job
+ * Find active pending or running job.
+ * Automatically marks jobs older than 30 minutes as failed to prevent permanently stuck jobs.
  */
 async function getActiveJob() {
   if (isDbConfigured()) {
     try {
+      // 1. Expire stale abandoned jobs older than 30 minutes
+      await query(
+        `UPDATE monitoring_jobs
+        SET
+          status = 'failed',
+          last_error = 'Job timed out after 30 minutes of inactivity',
+          completed_at = NOW(),
+          lease_until = NULL
+        WHERE status IN ('pending', 'running')
+          AND created_at <= NOW() - INTERVAL '30 minutes'`
+      );
+
+      // 2. Fetch the current active job (pending or running within 30 minutes)
       const res = await query(
         `SELECT
           id, status, total_companies AS "totalCompanies",
@@ -254,7 +268,7 @@ async function getActiveJob() {
           created_at AS "createdAt"
         FROM monitoring_jobs
         WHERE status IN ('pending', 'running')
-          AND (lease_until IS NULL OR lease_until > NOW() - INTERVAL '3 minutes')
+          AND created_at > NOW() - INTERVAL '30 minutes'
         ORDER BY created_at DESC
         LIMIT 1`
       );
@@ -264,14 +278,19 @@ async function getActiveJob() {
     }
   }
 
-  // Memory fallback
+  // Memory fallback with 30-minute stale cleanup
   const now = Date.now();
   for (const job of memoryJobs.values()) {
-    if (
-      (job.status === "pending" || job.status === "running") &&
-      (!job.leaseUntil || new Date(job.leaseUntil).getTime() > now - 180000)
-    ) {
-      return job;
+    const ageMs = now - new Date(job.createdAt || job.startedAt).getTime();
+    if (job.status === "pending" || job.status === "running") {
+      if (ageMs > 30 * 60 * 1000) {
+        job.status = "failed";
+        job.lastError = "Job timed out after 30 minutes of inactivity";
+        job.completedAt = new Date().toISOString();
+        job.leaseUntil = null;
+      } else {
+        return job;
+      }
     }
   }
   return null;
@@ -308,9 +327,16 @@ async function getJob(jobId) {
 }
 
 /**
- * Create a new monitoring job with a snapshot of companies to process
+ * Create a new monitoring job with a snapshot of companies to process.
+ * If an active job already exists or a concurrent insertion occurs, returns the active job.
  */
 async function createJob(companiesList) {
+  // Check if an active job already exists
+  const existingActive = await getActiveJob();
+  if (existingActive) {
+    return existingActive;
+  }
+
   const jobId = crypto.randomUUID();
 
   if (isDbConfigured()) {
@@ -330,6 +356,11 @@ async function createJob(companiesList) {
       );
       return res.rows[0];
     } catch (err) {
+      // If unique violation error (23505) from concurrent creation, fetch and return the active job
+      if (err.code === "23505") {
+        const active = await getActiveJob();
+        if (active) return active;
+      }
       console.warn("[MonitoringStore] createJob DB error, falling back to memory:", err.message);
     }
   }
@@ -390,6 +421,35 @@ async function acquireBatchLease(jobId, leaseMs = 25000) {
     return job;
   }
   return null;
+}
+
+/**
+ * Record a batch failure, releasing the lease immediately so subsequent retries are not blocked
+ */
+async function recordBatchFailure(jobId, errorMessage) {
+  if (isDbConfigured()) {
+    try {
+      await query(
+        `UPDATE monitoring_jobs
+        SET
+          status = 'pending',
+          last_error = $2,
+          lease_until = NULL
+        WHERE id = $1 AND status IN ('pending', 'running')`,
+        [jobId, errorMessage]
+      );
+      return;
+    } catch (err) {
+      console.warn("[MonitoringStore] recordBatchFailure DB error:", err.message);
+    }
+  }
+
+  const job = memoryJobs.get(jobId);
+  if (job && (job.status === "pending" || job.status === "running")) {
+    job.status = "pending";
+    job.lastError = errorMessage;
+    job.leaseUntil = null;
+  }
 }
 
 /**
@@ -470,5 +530,6 @@ module.exports = {
   createJob,
   acquireBatchLease,
   updateJobProgress,
+  recordBatchFailure,
   cancelJob
 };

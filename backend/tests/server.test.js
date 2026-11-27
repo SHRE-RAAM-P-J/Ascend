@@ -5,11 +5,15 @@
 
 const http = require("http");
 const assert = require("assert");
+const fs = require("fs");
+const path = require("path");
 
 process.env.NODE_ENV = "test";
 process.env.PORT = "5005"; // Use isolated test port
-// Isolate tests from external DB to prevent network timeouts during test suite
+// Isolate tests from external DB and production file to prevent test pollution
 delete process.env.DATABASE_URL;
+const TEST_RESULTS_FILE = path.join(__dirname, "../data/monitoringResults.server-test.json");
+process.env.RESULTS_FILE = TEST_RESULTS_FILE;
 
 // Stub live external job scrapers for deterministic test suite execution
 require.cache[require.resolve("../services/fetchMicrosoftJobs")] = {
@@ -31,10 +35,26 @@ require.cache[require.resolve("../services/fetchZohoJobs")] = {
 };
 
 const app = require("../server");
+const healthMonitor = require("../services/healthMonitor");
 
-function makeRequest(path, method = "GET", postData = null) {
+// Stub checkBatch in server integration test to prevent external network calls
+healthMonitor.checkBatch = async (batch) => {
+  return batch.map((c) => ({
+    companyId: c.id,
+    companyName: c.name,
+    careersUrl: c.careersUrl,
+    status: "UP",
+    httpStatusCode: 200,
+    responseTimeMs: 45,
+    lastCheckedAt: new Date().toISOString(),
+    errorMessage: null,
+    consecutiveFailures: 0
+  }));
+};
+
+function makeRequest(path, method = "GET", postData = null, customHeaders = {}) {
   return new Promise((resolve, reject) => {
-    const headers = {};
+    const headers = { ...customHeaders };
     let bodyPayload = "";
     if (postData) {
       bodyPayload = typeof postData === "string" ? postData : JSON.stringify(postData);
@@ -155,11 +175,50 @@ async function runServerTests() {
     assert(Array.isArray(jobsData), "Should return array of jobs");
     console.log(`  ✔ /jobs endpoint preserved and functional (returned ${jobsData.length} aggregated jobs)`);
 
+    // 11. Test CORS configuration and allowed methods (POST included)
+    console.log("\n[Test 11] CORS Configuration and Preflight Method Verification");
+    const corsPreflightRes = await makeRequest("/api/monitoring/refresh", "OPTIONS", null, {
+      "Origin": "https://ascend-directory.vercel.app",
+      "Access-Control-Request-Method": "POST"
+    });
+    assert([200, 204].includes(corsPreflightRes.statusCode), "Preflight should return 200 or 204");
+    const allowMethods = corsPreflightRes.headers["access-control-allow-methods"] || "";
+    assert(allowMethods.includes("POST"), "CORS must allow POST method for refresh workflows");
+    assert.strictEqual(
+      corsPreflightRes.headers["access-control-allow-origin"],
+      "https://ascend-directory.vercel.app",
+      "Should allow Vercel production/preview origins"
+    );
+    console.log("  ✔ CORS preflight allows POST requests from Vercel deployments");
+
+    // 12. Test GET /api/monitoring/cron endpoint
+    console.log("\n[Test 12] GET /api/monitoring/cron (Scheduled Endpoint & Auth)");
+    process.env.CRON_SECRET = "test-secret-12345";
+    // Unauthorized request should fail with 401
+    const unauthCronRes = await makeRequest("/api/monitoring/cron");
+    assert.strictEqual(unauthCronRes.statusCode, 401, "Unauthenticated cron request must be rejected with 401");
+    // Authorized request with Bearer token should succeed
+    const authCronRes = await makeRequest("/api/monitoring/cron", "GET", null, {
+      "Authorization": "Bearer test-secret-12345"
+    });
+    assert.strictEqual(authCronRes.statusCode, 200, "Authorized cron request should return 200");
+    const authCronData = JSON.parse(authCronRes.body);
+    assert.strictEqual(authCronData.success, true, "Cron response should indicate success");
+    delete process.env.CRON_SECRET;
+    console.log("  ✔ Scheduled cron endpoint validates CRON_SECRET and executes batches successfully");
+
     console.log("\n==========================================");
     console.log("ALL SERVER INTEGRATION TESTS PASSED! (100%)");
     console.log("==========================================\n");
   } finally {
     server.close();
+    if (fs.existsSync(TEST_RESULTS_FILE)) {
+      try {
+        fs.unlinkSync(TEST_RESULTS_FILE);
+      } catch {
+        // ignore
+      }
+    }
   }
 }
 

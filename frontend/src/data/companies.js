@@ -2,7 +2,7 @@
 // If a URL is missing, set it to null – it should be filled manually later.
 export const companies = [
   { name: "Accenture", url: "https://www.accenture.com/us-en/careers" },
-  { name: "Adidas", url: "https://careers.adidas.com" },
+  { name: "Adidas", url: "https://careers.adidas-group.com/" },
   { name: "Aditya Birla Group", url: "https://www.adityabirla.com/careers" },
   { name: "Adobe", url: "https://www.adobe.com/careers.html" },
   { name: "Airbnb", url: "https://careers.airbnb.com" },

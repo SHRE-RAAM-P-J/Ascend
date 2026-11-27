@@ -1,0 +1,29 @@
+name: Hourly Portal Health Monitoring
+
+on:
+  schedule:
+    # Executes at minute 0 of every hour (free via GitHub Actions)
+    - cron: '0 * * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  trigger-monitoring:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Ascend Scheduled Monitoring
+        env:
+          APP_URL: ${{ secrets.ASCEND_APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$APP_URL" ]; then
+            echo "Error: ASCEND_APP_URL repository secret is not set."
+            echo "Set it to your production URL, e.g. https://your-ascend.vercel.app"
+            exit 1
+          fi
+
+          echo "Triggering scheduled health check on $APP_URL..."
+          curl -sS -X GET "$APP_URL/api/monitoring/cron" \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            --retry 2 \
+            --max-time 60 \
+            --fail-with-body

@@ -36,3 +36,6 @@ CREATE TABLE IF NOT EXISTS monitoring_jobs (
 
 -- Index on status and lease for active job lookups
 CREATE INDEX IF NOT EXISTS idx_monitoring_jobs_status_lease ON monitoring_jobs(status, lease_until);
+
+-- Partial unique index ensuring at most one active (pending or running) job exists at any time
+CREATE UNIQUE INDEX IF NOT EXISTS idx_single_active_monitoring_job ON monitoring_jobs (status) WHERE status IN ('pending', 'running');
